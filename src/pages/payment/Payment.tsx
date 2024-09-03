@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
+import { formatCurrency } from "util/formatCurrency";
 
 export default function Payment() {
   const [paymentAmount, setPaymentAmount] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("credit_card");
+  const [paymentStore, setPaymentStore] = useState("credit_card");
   const [isProcessing, setIsProcessing] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    // todo: 접근 권한 설정 확인
-  }, []);
+    const queryParams = new URLSearchParams(location.search);
+    const amount = queryParams.get("amount");
+    const store = queryParams.get("store");
+
+    if (amount) {
+      setPaymentAmount(amount);
+    }
+    if (store) {
+      setPaymentStore(store);
+    }
+  }, [location.search]);
 
   const handlePayment = () => {
     setIsProcessing(true);
@@ -20,22 +32,14 @@ export default function Payment() {
     <Container>
       <h1>결제 페이지</h1>
       <div>
-        <label>
-          결제 금액:
-          <input
-            type="number"
-            value={paymentAmount}
-            onChange={(e) => setPaymentAmount(e.target.value)}
-            required
-          />
-        </label>
+        <h1>최종 결제 금액: {formatCurrency(paymentAmount)} </h1>
       </div>
       <div>
         <label>
           결제 방법:
           <select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
+            value={paymentStore}
+            onChange={(e) => setPaymentStore(e.target.value)}
           >
             <option value="credit_card">신용카드</option>
             <option value="bank_transfer">은행 이체</option>
