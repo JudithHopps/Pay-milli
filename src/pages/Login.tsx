@@ -12,7 +12,7 @@ const Login: React.FC = () => {
         {
           userId: userId,
           password: password,
-        }
+        },
       );
 
       if (response.status === 200) {

@@ -31,7 +31,7 @@ const SignupForm: React.FC = () => {
 
   // 폼 입력값이 변경될 때 호출되는 핸들러.
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData({
