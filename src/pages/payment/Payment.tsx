@@ -30,6 +30,7 @@ export default function Payment() {
   const [cardAllocations, setCardAllocations] = useState<{
     [key: string]: string;
   }>({});
+  const [selectedCards, setSelectedCards] = useState<Set<number>>(new Set());
   const location = useLocation();
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function Payment() {
       // 첫 번째 카드에 전체 금액을 할당
       if (cards.length > 0) {
         setCardAllocations({ [cards[0].id]: amount });
+        setSelectedCards(new Set([cards[0].id])); // 첫 번째 카드를 선택 상태로 설정
       }
     }
 
@@ -55,6 +57,7 @@ export default function Payment() {
         // 첫 번째 카드에 전체 금액을 세팅
         if (amount && data.length > 0) {
           setCardAllocations({ [data[0].id]: amount });
+          setSelectedCards(new Set([data[0].id])); // 첫 번째 카드를 선택 상태로 설정
         } else {
           // 각 카드에 0원 설정
           const initialAllocations = data.reduce(
@@ -75,10 +78,19 @@ export default function Payment() {
   }, [location.search]);
 
   const handleCardAmountChange = (cardId: number, amount: string) => {
-    // 입력값이 숫자로 변환될 수 있는지 확인하고, 앞에 0이 없도록 처리
     const normalizedAmount = parseFloat(amount).toString();
-
     setCardAllocations((prev) => ({ ...prev, [cardId]: normalizedAmount }));
+
+    // 금액이 0보다 큰 경우 카드를 선택 상태로 변경
+    setSelectedCards((prev) => {
+      const updatedSet = new Set(prev);
+      if (parseFloat(normalizedAmount) > 0) {
+        updatedSet.add(cardId);
+      } else {
+        updatedSet.delete(cardId);
+      }
+      return updatedSet;
+    });
   };
 
   const handlePayment = () => {
@@ -111,6 +123,27 @@ export default function Payment() {
         {cards.map((card) => (
           <CardAllocation key={card.id}>
             <label>
+              <input
+                type="checkbox"
+                checked={selectedCards.has(card.id)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    // 카드가 선택될 때, 0원이면 기본값을 1로 설정
+                    if (parseFloat(cardAllocations[card.id] || "0") === 0) {
+                      handleCardAmountChange(card.id, "1");
+                    } else {
+                      setSelectedCards((prev) => new Set(prev).add(card.id));
+                    }
+                  } else {
+                    // 카드 선택 해제 시
+                    setSelectedCards((prev) => {
+                      const updatedSet = new Set(prev);
+                      updatedSet.delete(card.id);
+                      return updatedSet;
+                    });
+                  }
+                }}
+              />
               {card.name}:
               <input
                 type="number"
@@ -118,6 +151,7 @@ export default function Payment() {
                 onChange={(e) =>
                   handleCardAmountChange(card.id, e.target.value)
                 }
+                disabled={!selectedCards.has(card.id)}
               />
             </label>
           </CardAllocation>
@@ -142,7 +176,11 @@ const CardAllocation = styled.div`
     display: flex;
     align-items: center;
 
-    input {
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    input[type="number"] {
       margin-left: 10px;
       width: 100px;
     }
