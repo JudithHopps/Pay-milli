@@ -40,26 +40,22 @@ export default function Payment() {
     if (amount) {
       setPaymentAmount(amount);
 
-      // 첫 번째 카드에 전체 금액을 할당
       if (cards.length > 0) {
         setCardAllocations({ [cards[0].id]: amount });
-        setSelectedCards(new Set([cards[0].id])); // 첫 번째 카드를 선택 상태로 설정
+        setSelectedCards(new Set([cards[0].id]));
       }
     }
 
-    // 카드 목록을 API 호출로 가져오기
     const fetchCards = async () => {
       try {
-        const response = await fetch("/api/cards"); // 카드 API 호출
+        const response = await fetch("/api/cards");
         const data = await response.json();
         setCards(data);
 
-        // 첫 번째 카드에 전체 금액을 세팅
         if (amount && data.length > 0) {
           setCardAllocations({ [data[0].id]: amount });
-          setSelectedCards(new Set([data[0].id])); // 첫 번째 카드를 선택 상태로 설정
+          setSelectedCards(new Set([data[0].id]));
         } else {
-          // 각 카드에 0원 설정
           const initialAllocations = data.reduce(
             (acc: { [key: string]: string }, card: Card) => {
               acc[card.id] = "0";
@@ -81,7 +77,6 @@ export default function Payment() {
     const normalizedAmount = parseFloat(amount).toString();
     setCardAllocations((prev) => ({ ...prev, [cardId]: normalizedAmount }));
 
-    // 금액이 0보다 큰 경우 카드를 선택 상태로 변경
     setSelectedCards((prev) => {
       const updatedSet = new Set(prev);
       if (parseFloat(normalizedAmount) > 0) {
@@ -91,6 +86,23 @@ export default function Payment() {
       }
       return updatedSet;
     });
+  };
+
+  const handleCheckboxChange = (cardId: number, checked: boolean) => {
+    if (checked) {
+      if (parseFloat(cardAllocations[cardId] || "0") === 0) {
+        handleCardAmountChange(cardId, "1");
+      } else {
+        setSelectedCards((prev) => new Set(prev).add(cardId));
+      }
+    } else {
+      setCardAllocations((prev) => ({ ...prev, [cardId]: "0" }));
+      setSelectedCards((prev) => {
+        const updatedSet = new Set(prev);
+        updatedSet.delete(cardId);
+        return updatedSet;
+      });
+    }
   };
 
   const handlePayment = () => {
@@ -106,10 +118,7 @@ export default function Payment() {
 
     setIsProcessing(true);
 
-    // 결제 처리 로직 추가: 각 카드에 대해 분배된 금액을 API로 전송
     console.log("결제 처리 시작:", cardAllocations);
-
-    // 결제 완료 후 상태 리셋 등 추가 처리 필요
   };
 
   return (
@@ -121,28 +130,14 @@ export default function Payment() {
       <div>
         <h2>카드 선택:</h2>
         {cards.map((card) => (
-          <CardAllocation key={card.id}>
+          <CardAllocation key={card.id} selected={selectedCards.has(card.id)}>
             <label>
               <input
                 type="checkbox"
                 checked={selectedCards.has(card.id)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    // 카드가 선택될 때, 0원이면 기본값을 1로 설정
-                    if (parseFloat(cardAllocations[card.id] || "0") === 0) {
-                      handleCardAmountChange(card.id, "1");
-                    } else {
-                      setSelectedCards((prev) => new Set(prev).add(card.id));
-                    }
-                  } else {
-                    // 카드 선택 해제 시
-                    setSelectedCards((prev) => {
-                      const updatedSet = new Set(prev);
-                      updatedSet.delete(card.id);
-                      return updatedSet;
-                    });
-                  }
-                }}
+                onChange={(e) =>
+                  handleCheckboxChange(card.id, e.target.checked)
+                }
               />
               {card.name}:
               <input
@@ -169,8 +164,12 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const CardAllocation = styled.div`
+const CardAllocation = styled.div<{ selected: boolean }>`
   margin-bottom: 10px;
+  border: ${(props) =>
+    props.selected ? "2px solid var(--main-color)" : "1px solid #ccc"};
+  padding: 10px;
+  border-radius: 8px;
 
   label {
     display: flex;
