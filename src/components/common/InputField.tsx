@@ -1,5 +1,3 @@
-import React from "react";
-
 interface InputFieldProps {
   label: string;
   name: string;
@@ -9,14 +7,14 @@ interface InputFieldProps {
   required?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+function InputField({
   label,
   name,
   type,
   value,
   onChange,
   required,
-}) => {
+}: InputFieldProps) {
   return (
     <div>
       <label>{label}</label>
@@ -29,6 +27,6 @@ const InputField: React.FC<InputFieldProps> = ({
       />
     </div>
   );
-};
+}
 
 export default InputField;

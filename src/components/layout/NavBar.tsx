@@ -1,10 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/components/NavBar.css";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 
-const NavBar: React.FC = () => {
+function NavBar() {
   return (
     <nav className="navbar">
       <div className="logo-container">
@@ -23,6 +22,6 @@ const NavBar: React.FC = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default NavBar;

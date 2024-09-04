@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SelectFieldProps {
   label: string;
   name: string;
@@ -9,14 +7,14 @@ interface SelectFieldProps {
   required?: boolean;
 }
 
-const SelectField: React.FC<SelectFieldProps> = ({
+function SelectField({
   label,
   name,
   value,
   options,
   onChange,
   required,
-}) => {
+}: SelectFieldProps) {
   return (
     <div>
       <label>{label}</label>
@@ -29,6 +27,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
       </select>
     </div>
   );
-};
+}
 
 export default SelectField;
