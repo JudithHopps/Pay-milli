@@ -1,6 +1,15 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios, { AxiosError } from "axios";
+import InputField from "./InputField";
+import SelectField from "./SelectField";
+import SubmitButton from "./SubmitButton";
 
+enum GenderType {
+  FEMALE = "FEMALE",
+  MALE = "MALE",
+}
+
+// 회원가입 폼 데이터 타입 정의
 interface SignupFormData {
   userId: string; // 아이디
   name: string; // 이름
@@ -12,12 +21,8 @@ interface SignupFormData {
   paymentPassword: string; // 결제비밀번호(6자리)
 }
 
-enum GenderType {
-  FEMALE = "FEMALE",
-  MALE = "MALE",
-}
-
 const SignupForm: React.FC = () => {
+  // 폼 데이터를 관리하는 상태
   const [formData, setFormData] = useState<SignupFormData>({
     userId: "",
     name: "",
@@ -29,7 +34,7 @@ const SignupForm: React.FC = () => {
     paymentPassword: "",
   });
 
-  // 폼 입력값이 변경될 때 호출되는 핸들러.
+  // 폼 입력값이 변경될 때 상태 업데이트
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -40,111 +45,98 @@ const SignupForm: React.FC = () => {
     });
   };
 
-  // 폼이 제출될 때 호출되는 비동기 핸들러.
+  // 폼이 제출될 때 실행되는 함수
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post("/user/join", formData);
+
       if (response.status === 200) {
         console.log("회원가입 성공");
+        // 회원가입 성공 후 처리 로직 추가
       }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+    } catch (err) {
+      const error = err as AxiosError;
+
+      if (error.response?.status === 404) {
         console.log("회원가입 실패: 비밀번호가 부적합합니다.");
       } else {
-        console.log("회원가입 실패: 서버 오류");
+        console.log("회원가입 실패: 서버 오류가 발생했습니다.");
       }
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>아이디: </label>
-          <input
-            type="text"
-            name="userId"
-            value={formData.userId}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>이름: </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>이메일: </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>비밀번호: </label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>생년월일: </label>
-          <input
-            type="date"
-            name="birthday"
-            value={formData.birthday}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>성별: </label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-          >
-            <option value={GenderType.FEMALE}>여성</option>
-            <option value={GenderType.MALE}>남성</option>
-          </select>
-        </div>
-        <div>
-          <label>전화번호: </label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>결제 비밀번호: </label>
-          <input
-            type="password"
-            name="paymentPassword"
-            value={formData.paymentPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">회원가입</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <InputField
+        label="아이디"
+        name="userId"
+        type="text"
+        value={formData.userId}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="이름"
+        name="name"
+        type="text"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="이메일"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="비밀번호"
+        name="password"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="생년월일"
+        name="birthday"
+        type="date"
+        value={formData.birthday}
+        onChange={handleChange}
+        required
+      />
+      <SelectField
+        label="성별"
+        name="gender"
+        value={formData.gender}
+        options={[
+          { value: GenderType.FEMALE, label: "여성" },
+          { value: GenderType.MALE, label: "남성" },
+        ]}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="전화번호"
+        name="phone"
+        type="tel"
+        value={formData.phone}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        label="결제 비밀번호"
+        name="paymentPassword"
+        type="password"
+        value={formData.paymentPassword}
+        onChange={handleChange}
+        required
+      />
+      <SubmitButton label="회원가입" />
+    </form>
   );
 };
 
