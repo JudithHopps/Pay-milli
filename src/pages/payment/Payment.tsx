@@ -1,24 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { formatCurrency } from "util/formatCurrency";
 
 interface Card {
   id: number;
+  img: string;
   name: string;
 }
 
 const CARD_DATA: Card[] = [
   {
     id: 1,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7CSl1FTZlb3n9cjxIS-8JtTZY0mLK1-ucbA&s",
     name: "SSAFY",
   },
   {
     id: 2,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7Ywl2SlW7v5hO171wEsh3OoHABlxagdwpQ&s",
     name: "11기",
   },
   {
     id: 3,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9eJg6IqyETzLjkEjcYfEgwA6Zl_3NmsS_eQ&s",
     name: "서울",
   },
 ];
@@ -31,6 +35,9 @@ export default function Payment() {
     [key: string]: string;
   }>({});
   const [selectedCards, setSelectedCards] = useState<Set<number>>(new Set());
+  const [rotateImage, setRotateImage] = useState<{ [key: number]: boolean }>(
+    {},
+  );
   const location = useLocation();
 
   useEffect(() => {
@@ -72,6 +79,28 @@ export default function Payment() {
 
     fetchCards();
   }, [location.search]);
+
+  useEffect(() => {
+    const checkImageOrientation = () => {
+      cards.forEach((card) => {
+        const img = document.getElementById(
+          `card-img-${card.id}`,
+        ) as HTMLImageElement;
+
+        if (img) {
+          img.onload = () => {
+            if (img.naturalWidth > img.naturalHeight) {
+              setRotateImage((prev) => ({ ...prev, [card.id]: true }));
+            } else {
+              setRotateImage((prev) => ({ ...prev, [card.id]: false }));
+            }
+          };
+        }
+      });
+    };
+
+    checkImageOrientation();
+  }, [cards]);
 
   const handleCardAmountChange = (cardId: number, amount: string) => {
     const normalizedAmount = parseFloat(amount).toString();
@@ -130,7 +159,11 @@ export default function Payment() {
       <div>
         <h2>카드 선택:</h2>
         {cards.map((card) => (
-          <CardAllocation key={card.id} selected={selectedCards.has(card.id)}>
+          <CardAllocation
+            key={card.id}
+            selected={selectedCards.has(card.id)}
+            rotate={rotateImage[card.id] || false}
+          >
             <label>
               <input
                 type="checkbox"
@@ -138,6 +171,12 @@ export default function Payment() {
                 onChange={(e) =>
                   handleCheckboxChange(card.id, e.target.checked)
                 }
+              />
+              <CardImage
+                id={`card-img-${card.id}`}
+                src={card.img}
+                alt={"카드 이미지"}
+                rotate={rotateImage[card.id]}
               />
               {card.name}:
               <input
@@ -164,7 +203,7 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const CardAllocation = styled.div<{ selected: boolean }>`
+const CardAllocation = styled.div<{ selected: boolean; rotate: boolean }>`
   margin-bottom: 10px;
   border: ${(props) =>
     props.selected ? "2px solid var(--main-color)" : "1px solid #ccc"};
@@ -186,12 +225,19 @@ const CardAllocation = styled.div<{ selected: boolean }>`
   }
 `;
 
+const CardImage = styled.img<{ rotate: boolean }>`
+  //transform: ${(props) => (props.rotate ? "rotate(90deg)" : "none")};
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+`;
+
 const SubmitButton = styled.button`
   background-color: var(--main-color);
   border: none;
   display: flex;
   border-radius: 40px;
-  width: 320px;
+  width: 600px;
   height: 56px;
   padding: 10px 20px;
   justify-content: center;
