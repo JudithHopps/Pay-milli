@@ -3,16 +3,20 @@ import NotFound from "pages/NotFound";
 import Main from "pages/Main";
 import Signup from "pages/auth/Signup";
 import Login from "pages/auth/Login";
+import NavBar from "components/layout/NavBar";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
