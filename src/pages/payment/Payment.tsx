@@ -157,9 +157,9 @@ export default function Payment() {
           </CardAllocation>
         ))}
       </div>
-      <button onClick={handlePayment} disabled={isProcessing}>
+      <SubmitButton onClick={handlePayment} disabled={isProcessing}>
         {isProcessing ? "결제 처리 중..." : "결제하기"}
-      </button>
+      </SubmitButton>
     </Container>
   );
 }
@@ -185,4 +185,22 @@ const CardAllocation = styled.div`
       width: 100px;
     }
   }
+`;
+
+const SubmitButton = styled.button`
+  background-color: var(--main-color);
+  border: none;
+  display: flex;
+  border-radius: 40px;
+  width: 320px;
+  height: 56px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  position: fixed;
+  bottom: 50px;
 `;
