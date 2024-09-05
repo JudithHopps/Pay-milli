@@ -1,22 +1,14 @@
 import axiosInstance from "./axiosInstance";
+import { SignupFormData, LoginFormData } from "../types/types";
 
 // 회원가입 API
-export const signup = async (formData: {
-  userId: string;
-  name: string;
-  email: string;
-  password: string;
-  birthday: string;
-  gender: string;
-  phone: string;
-  paymentPassword: string;
-}) => {
+export const signup = async (formData: SignupFormData) => {
   const response = await axiosInstance.post("/user/join", formData);
   return response.data;
 };
 
 // 로그인 API
-export const login = async (formData: { userId: string; password: string }) => {
+export const login = async (formData: LoginFormData) => {
   const response = await axiosInstance.post<{ accessToken: string }>(
     "/user/login",
     formData,

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { login } from "../../api/authApi";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
+import { LoginFormData } from "../../types/types";
 
 function LoginForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<LoginFormData>({
     userId: "",
     password: "",
   });

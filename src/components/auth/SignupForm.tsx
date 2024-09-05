@@ -3,6 +3,7 @@ import { signup } from "../../api/authApi";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
+import { SignupFormData } from "../../types/types";
 
 enum GenderType {
   FEMALE = "FEMALE",
@@ -10,7 +11,7 @@ enum GenderType {
 }
 
 function SignupForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignupFormData>({
     userId: "",
     name: "",
     email: "",

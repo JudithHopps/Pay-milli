@@ -1,0 +1,15 @@
+export interface SignupFormData {
+  userId: string;
+  name: string;
+  email: string;
+  password: string;
+  birthday: string;
+  gender: string;
+  phone: string;
+  paymentPassword: string;
+}
+
+export interface LoginFormData {
+  userId: string;
+  password: string;
+}
