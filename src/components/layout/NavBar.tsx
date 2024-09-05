@@ -14,6 +14,7 @@ function NavBar() {
         <StyledLink to="/">홈</StyledLink>
         <StyledLink to="/login">로그인</StyledLink>
         <StyledLink to="/signup">회원가입</StyledLink>
+        <StyledLink to="/userinfo">내 정보</StyledLink>
       </Links>
     </StyledNav>
   );
@@ -22,10 +23,16 @@ function NavBar() {
 export default NavBar;
 
 const StyledNav = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
@@ -38,14 +45,15 @@ const AppLogo = styled.img`
 
 const Links = styled.div`
   display: flex;
+  margin-right: 50px;
   gap: 10px;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 13px;
-  color: gray;
+  color: #222;
   &:hover {
-    color: #6dcef5;
+    color: #ccc;
   }
 `;

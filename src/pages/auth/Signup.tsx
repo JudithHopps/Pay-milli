@@ -14,7 +14,7 @@ export default Signup;
 
 const SignupContainer = styled.div`
   max-width: 400px;
-  margin: 50px auto;
+  margin: 100px auto;
   padding: 20px;
   background-color: #ccc;
   border-radius: 10px;
