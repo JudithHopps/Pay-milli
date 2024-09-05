@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { formatCurrency } from "util/formatCurrency";
+import PaymentPasswordInput from "components/payment/PaymentPasswordInput";
 
 interface Card {
   id: number;
@@ -38,6 +39,9 @@ export default function Payment() {
   const [rotateImage, setRotateImage] = useState<{ [key: number]: boolean }>(
     {},
   );
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [paymentPassword, setPaymentPassword] = useState<string>("");
+
   const location = useLocation();
 
   useEffect(() => {
@@ -146,55 +150,75 @@ export default function Payment() {
     }
 
     setIsProcessing(true);
+    setShowPassword(true);
 
     console.log("결제 처리 시작:", cardAllocations);
   };
 
+  const handlePasswordSubmit = (password: string) => {
+    if (password === "1234") {
+      // Replace with proper validation logic
+      console.log("Password correct. Proceed with payment:", cardAllocations);
+      setIsProcessing(true);
+      setShowPassword(false);
+      // Proceed with payment logic here (e.g., API call)
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+      setIsProcessing(false);
+    }
+  };
+
   return (
-    <Container>
-      <h1>결제 페이지</h1>
-      <div>
-        <h2>최종 결제 금액: {formatCurrency(paymentAmount)}</h2>
-      </div>
-      <div>
-        <h2>카드 선택:</h2>
-        {cards.map((card) => (
-          <CardAllocation
-            key={card.id}
-            selected={selectedCards.has(card.id)}
-            rotate={rotateImage[card.id] || false}
-          >
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedCards.has(card.id)}
-                onChange={(e) =>
-                  handleCheckboxChange(card.id, e.target.checked)
-                }
-              />
-              <CardImage
-                id={`card-img-${card.id}`}
-                src={card.img}
-                alt={"카드 이미지"}
-                rotate={rotateImage[card.id]}
-              />
-              {card.name}:
-              <input
-                type="number"
-                value={cardAllocations[card.id] || "0"}
-                onChange={(e) =>
-                  handleCardAmountChange(card.id, e.target.value)
-                }
-                disabled={!selectedCards.has(card.id)}
-              />
-            </label>
-          </CardAllocation>
-        ))}
-      </div>
-      <SubmitButton onClick={handlePayment} disabled={isProcessing}>
-        {isProcessing ? "결제 처리 중..." : "결제하기"}
-      </SubmitButton>
-    </Container>
+    <>
+      {showPassword ? (
+        <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
+      ) : (
+        <Container>
+          <h1>결제 페이지</h1>
+          <div>
+            <h2>최종 결제 금액: {formatCurrency(paymentAmount)}</h2>
+          </div>
+          <div>
+            <h2>카드 선택:</h2>
+            {cards.map((card) => (
+              <CardAllocation
+                key={card.id}
+                selected={selectedCards.has(card.id)}
+                rotate={rotateImage[card.id] || false}
+              >
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selectedCards.has(card.id)}
+                    onChange={(e) =>
+                      handleCheckboxChange(card.id, e.target.checked)
+                    }
+                  />
+                  <CardImage
+                    id={`card-img-${card.id}`}
+                    src={card.img}
+                    alt={"카드 이미지"}
+                    rotate={rotateImage[card.id]}
+                  />
+                  {card.name}:
+                  <input
+                    type="number"
+                    value={cardAllocations[card.id] || "0"}
+                    onChange={(e) =>
+                      handleCardAmountChange(card.id, e.target.value)
+                    }
+                    disabled={!selectedCards.has(card.id)}
+                  />
+                </label>
+              </CardAllocation>
+            ))}
+          </div>
+          <SubmitButton onClick={handlePayment} disabled={isProcessing}>
+            {isProcessing ? "결제 처리 중..." : "결제하기"}
+          </SubmitButton>
+        </Container>
+      )}
+    </>
   );
 }
 
