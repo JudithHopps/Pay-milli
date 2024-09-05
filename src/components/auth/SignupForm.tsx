@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { signup } from "../../api/authApi";
+import { SignupFormData } from "../../types/types";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
-import { SignupFormData } from "../../types/types";
 
 enum GenderType {
   FEMALE = "FEMALE",
@@ -47,7 +48,7 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <InputField
         label="아이디"
         name="userId"
@@ -116,8 +117,18 @@ function SignupForm() {
         required
       />
       <SubmitButton label="회원가입" />
-    </form>
+    </FormContainer>
   );
 }
 
 export default SignupForm;
+
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+`;

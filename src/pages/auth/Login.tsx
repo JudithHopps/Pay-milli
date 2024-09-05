@@ -1,12 +1,26 @@
+import styled from "styled-components";
 import LoginForm from "../../components/auth/LoginForm";
 
 function Login() {
   return (
-    <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-      <h1>로그인</h1>
+    <LoginContainer>
+      <LoginTitle>로그인</LoginTitle>
       <LoginForm />
-    </div>
+    </LoginContainer>
   );
 }
 
 export default Login;
+
+const LoginContainer = styled.div`
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+`;
+
+const LoginTitle = styled.h1`
+  text-align: center;
+  color: #333;
+`;

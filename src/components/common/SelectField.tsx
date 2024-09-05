@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 interface SelectFieldProps {
   label: string;
   name: string;
@@ -16,17 +18,44 @@ function SelectField({
   required,
 }: SelectFieldProps) {
   return (
-    <div>
-      <label>{label}</label>
-      <select name={name} value={value} onChange={onChange} required={required}>
+    <SelectWrapper>
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      <StyledSelect
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+      >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </select>
-    </div>
+      </StyledSelect>
+    </SelectWrapper>
   );
 }
 
 export default SelectField;
+
+const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #333;
+`;
+
+const StyledSelect = styled.select`
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  &:focus {
+    border-color: #333;
+  }
+`;

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { login } from "../../api/authApi";
+import { LoginFormData } from "../../types/types";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
-import { LoginFormData } from "../../types/types";
 
 function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
@@ -30,7 +31,7 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <InputField
         label="아이디"
         name="userId"
@@ -48,8 +49,18 @@ function LoginForm() {
         required
       />
       <SubmitButton label="로그인" />
-    </form>
+    </FormContainer>
   );
 }
 
 export default LoginForm;
+
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+`;
