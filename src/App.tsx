@@ -5,7 +5,7 @@ import Header from "./component/Header";
 import NotFound from "./pages/NotFound";
 import Main from "./pages/Main";
 import PaymentHistoryPage from "./pages/PaymentHistoryPage";
-import CardManagementPage from './pages/CardManagementPage';
+import CardManagementPage from "./pages/CardManagementPage";
 
 function App() {
   return (

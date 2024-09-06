@@ -1,5 +1,5 @@
-import React from 'react';
-import './PaymentDetails.css';
+import React from "react";
+import "./PaymentDetails.css";
 
 interface Payment {
   date: string;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './AddCardForm.css';
+import React, { useState } from "react";
+import "./AddCardForm.css";
 
 interface AddCardFormProps {
   onSubmit: (name: string, imageUrl: string) => void;
@@ -7,11 +7,11 @@ interface AddCardFormProps {
 }
 
 const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
-  const [cardType, setCardType] = useState('체크카드');
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [password, setPassword] = useState('');
+  const [cardType, setCardType] = useState("체크카드");
+  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleCardNumberChange = (index: number, value: string) => {
     const newCardNumber = [...cardNumber];
@@ -20,7 +20,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit('새로운 카드', '/images/new_card.png');
+    onSubmit("새로운 카드", "/images/new_card.png");
   };
 
   return (
@@ -31,7 +31,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
           <input
             type="radio"
             value="체크카드"
-            checked={cardType === '체크카드'}
+            checked={cardType === "체크카드"}
             onChange={(e) => setCardType(e.target.value)}
           />
           체크카드
@@ -40,7 +40,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
           <input
             type="radio"
             value="신용카드"
-            checked={cardType === '신용카드'}
+            checked={cardType === "신용카드"}
             onChange={(e) => setCardType(e.target.value)}
           />
           신용카드

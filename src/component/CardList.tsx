@@ -1,5 +1,5 @@
-import React from 'react';
-import './CardList.css';
+import React from "react";
+import "./CardList.css";
 
 interface Card {
   id: number;
@@ -13,11 +13,19 @@ interface CardListProps {
   onAddCardClick: () => void;
 }
 
-const CardList: React.FC<CardListProps> = ({ cards, onCardClick, onAddCardClick }) => {
+const CardList: React.FC<CardListProps> = ({
+  cards,
+  onCardClick,
+  onAddCardClick,
+}) => {
   return (
     <div className="card-list">
       {cards.map((card) => (
-        <div key={card.id} className="card-item" onClick={() => onCardClick(card.id)}>
+        <div
+          key={card.id}
+          className="card-item"
+          onClick={() => onCardClick(card.id)}
+        >
           <img src={card.imageUrl} alt={card.name} />
         </div>
       ))}

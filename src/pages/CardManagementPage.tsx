@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import CardList from '../component/CardList';
-import AddCardForm from '../component/AddCardForm';
-import './CardManagementPage.css';
+import React, { useState } from "react";
+import CardList from "../component/CardList";
+import AddCardForm from "../component/AddCardForm";
+import "./CardManagementPage.css";
 
 const CardManagementPage: React.FC = () => {
   const [cards, setCards] = useState([
-    { id: 1, name: '신한카드', imageUrl: '/images/card1.png' },
-    { id: 2, name: '국민카드', imageUrl: '/images/card2.png' },
+    { id: 1, name: "신한카드", imageUrl: "/images/card1.png" },
+    { id: 2, name: "국민카드", imageUrl: "/images/card2.png" },
   ]);
 
   const [showAddCardForm, setShowAddCardForm] = useState(false);
