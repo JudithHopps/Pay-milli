@@ -66,8 +66,8 @@ export default function RefundProcess() {
     const paymentId = queryParams.get("paymentId");
 
     if (paymentId) {
-      // 여기에 API 호출 로직을 추가하여 결제 데이터를 가져오세요
-      // 예: fetchData(paymentId);
+      //todo : api 호출
+      setPaymentId(paymentId);
     }
   }, [location.search]);
 

@@ -158,11 +158,9 @@ export default function Payment() {
   const handlePasswordSubmit = (password: string) => {
     // todo : 비밀번호 확인 로직 추가!!
     if (password === "1234") {
-      // Replace with proper validation logic
       console.log("Password correct. Proceed with payment:", cardAllocations);
       setIsProcessing(true);
       setShowPassword(false);
-      // Proceed with payment logic here (e.g., API call)
     } else {
       alert("비밀번호가 틀렸습니다.");
       setIsProcessing(false);
