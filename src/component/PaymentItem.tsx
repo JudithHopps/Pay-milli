@@ -1,11 +1,16 @@
 import React from "react";
 import "./PaymentItem.css";
 
+interface CardPayment {
+  cardName: string;
+  amount: number;
+}
+
 interface PaymentItemProps {
   date: string;
   name: string;
   amount: number;
-  cards: { cardName: string; amount: number }[];
+  cards: CardPayment[];
 }
 
 const PaymentItem: React.FC<PaymentItemProps> = ({
@@ -24,7 +29,7 @@ const PaymentItem: React.FC<PaymentItemProps> = ({
           <span className={"payment-item-name"}>{name}</span>
           <span className={"payment-item-amount"}>
             {amount.toLocaleString()}
-            {"원\r"}
+            {"원"}
           </span>
         </div>
         <div className={"payment-item-cards"}>

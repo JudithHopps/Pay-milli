@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import PaymentItem from "../component/PaymentItem";
+import "./PaymentHistoryPage.css";
+
+interface CardPayment {
+  cardName: string;
+  amount: number;
+}
 
 interface Payment {
   id: string;
@@ -10,6 +16,7 @@ interface Payment {
   price: number;
   date: string;
   paymentStatus: string;
+  cards: CardPayment[];
 }
 
 const PaymentHistoryPage: React.FC = () => {
@@ -51,10 +58,15 @@ const PaymentHistoryPage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{"전체 결제 내역"}</h1>
+    <div className="payment-history-container">
+      <div className="payment-summary">
+        <span>총 승인 {payments.length}건</span> {/* 조회된 건수 표시 */}
+      </div>
+      <hr />
       {payments.length === 0 ? (
-        <div>결제 내역이 없습니다.</div>
+        <div className="payment-history-no-data">
+          조회된 거래내역이 없습니다.
+        </div>
       ) : (
         payments.map((payment) => (
           <PaymentItem
@@ -62,10 +74,11 @@ const PaymentHistoryPage: React.FC = () => {
             date={payment.date}
             name={payment.storeName}
             amount={payment.price}
-            cards={[]} // 카드 정보는 응답에 없으므로 빈 배열로 설정
+            cards={payment.cards} // 카드 결제 정보 전달
           />
         ))
       )}
+      <hr />
     </div>
   );
 
