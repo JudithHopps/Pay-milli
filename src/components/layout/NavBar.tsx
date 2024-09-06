@@ -1,14 +1,30 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 function NavBar() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    setIsLogin(!!localStorage.getItem("accessToken"));
+  }, []);
+
   return (
     <StyledNav>
       <Links>
         <StyledLink to="/">홈</StyledLink>
-        <StyledLink to="/login">로그인</StyledLink>
-        <StyledLink to="/signup">회원가입</StyledLink>
-        <StyledLink to="/userinfo">내 정보</StyledLink>
+        {isLogin ? (
+          <>
+            <StyledLink to="/userinfo">내 정보</StyledLink>
+            <StyledLink to="/logout">로그아웃</StyledLink>
+          </>
+        ) : (
+          <>
+            <StyledLink to="/userinfo">내 정보</StyledLink>
+            <StyledLink to="/login">로그인</StyledLink>
+            <StyledLink to="/signup">회원가입</StyledLink>
+          </>
+        )}
       </Links>
     </StyledNav>
   );
