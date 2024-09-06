@@ -7,6 +7,7 @@ interface InputFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
+  placeholder?: string;
 }
 
 function InputField({
@@ -16,6 +17,7 @@ function InputField({
   value,
   onChange,
   required,
+  placeholder,
 }: InputFieldProps) {
   return (
     <InputWrapper>
@@ -26,6 +28,7 @@ function InputField({
         value={value}
         onChange={onChange}
         required={required}
+        placeholder={placeholder}
       />
     </InputWrapper>
   );
