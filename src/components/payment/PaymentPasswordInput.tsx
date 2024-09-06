@@ -16,7 +16,7 @@ export default function PaymentPasswordInput({
     if (password.length < 6) {
       setPassword((prev) => prev + num);
     }
-    if (password.length == 6) {
+    if (password.length == 5) {
       onSubmit(password + num);
     }
   };

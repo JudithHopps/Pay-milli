@@ -72,12 +72,11 @@ export default function RefundProcess() {
   }, [location.search]);
 
   const handlePasswordSubmit = (password: string) => {
-    // 여기에 비밀번호 확인 로직을 추가하세요 (API 호출 등)
-    if (password === "1234") {
+    // todo : 비번 확인 로직
+    if (password === "111111") {
       console.log("Password correct. Proceed with payment:");
       setIsProcessing(true);
       setShowPassword(false);
-      // 실제 결제 처리 로직을 추가하세요
     } else {
       alert("비밀번호가 틀렸습니다.");
       setIsProcessing(false);
