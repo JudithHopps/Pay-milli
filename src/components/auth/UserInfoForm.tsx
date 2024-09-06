@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { getUserInfo } from "../../api/authApi";
 import { UserInfoData } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function UserInfoForm() {
   const [userInfo, setUserInfo] = useState<UserInfoData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        navigate("/login");
+        return;
+      }
+
       try {
-        const data = await getUserInfo();
+        const data = await getUserInfo(accessToken);
         setUserInfo(data);
       } catch (err) {
         console.error(err);
@@ -30,7 +40,7 @@ function UserInfoForm() {
     };
 
     fetchUserInfo();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return <LoadingText>로딩 중...</LoadingText>;

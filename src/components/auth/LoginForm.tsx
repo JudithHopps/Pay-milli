@@ -22,7 +22,8 @@ function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(formData);
+      const data = await login(formData);
+      localStorage.setItem("accessToken", data.accessToken);
       alert("로그인 성공");
     } catch (err) {
       console.error(err);
