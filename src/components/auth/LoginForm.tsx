@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { login } from "../../api/authApi";
 import { LoginFormData } from "../../types/types";
@@ -30,6 +30,12 @@ function LoginForm() {
       alert("로그인 실패");
     }
   };
+
+  //임시 로그인 상태 확인 용
+  useEffect(() => {
+    const accessToken = "123456";
+    localStorage.setItem("accessToken", accessToken);
+  }, []);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
