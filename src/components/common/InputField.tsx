@@ -10,7 +10,7 @@ interface InputFieldProps {
   placeholder?: string;
 }
 
-function InputField({
+export default function InputField({
   label,
   name,
   type,
@@ -33,8 +33,6 @@ function InputField({
     </InputWrapper>
   );
 }
-
-export default InputField;
 
 const InputWrapper = styled.div`
   display: flex;

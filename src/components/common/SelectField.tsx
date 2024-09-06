@@ -9,7 +9,7 @@ interface SelectFieldProps {
   required?: boolean;
 }
 
-function SelectField({
+export default function SelectField({
   label,
   name,
   value,
@@ -35,8 +35,6 @@ function SelectField({
     </SelectWrapper>
   );
 }
-
-export default SelectField;
 
 const SelectWrapper = styled.div`
   display: flex;
