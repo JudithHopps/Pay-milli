@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../assets/logo.png";
 
 function NavBar() {
   return (
     <StyledNav>
-      <LogoContainer>
-        <StyledLink to="/">
-          <AppLogo src={logo} alt="Pay-milli 로고" />
-        </StyledLink>
-      </LogoContainer>
       <Links>
         <StyledLink to="/">홈</StyledLink>
         <StyledLink to="/login">로그인</StyledLink>
@@ -29,30 +23,38 @@ const StyledNav = styled.nav`
   width: 100%;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px 20px;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const LogoContainer = styled.div``;
-
-const AppLogo = styled.img`
-  height: 40px;
-  border-radius: 10px;
 `;
 
 const Links = styled.div`
   display: flex;
-  margin-right: 50px;
-  gap: 10px;
+  margin-right: 100px;
+  gap: 20px;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   color: #222;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    right: -10px;
+    height: 60%;
+    width: 1px;
+    background-color: #ccc;
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+
   &:hover {
     color: #ccc;
   }
