@@ -13,7 +13,6 @@ const Header: React.FC = () => {
         <Link to={"/"}>{"서비스 소개"}</Link>
         <Link to={"/total"}>{"전체 결제 내역"}</Link>
         <Link to={"/cardmanagement"}>{"내 카드 관리"}</Link>
-        <Link to={"/profile"}>{"내 정보 수정"}</Link>
       </nav>
     </header>
   );
