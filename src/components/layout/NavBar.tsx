@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-function NavBar() {
+export default function NavBar() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -29,8 +29,6 @@ function NavBar() {
     </StyledNav>
   );
 }
-
-export default NavBar;
 
 const StyledNav = styled.nav`
   position: fixed;
