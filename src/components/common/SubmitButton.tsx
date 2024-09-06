@@ -9,14 +9,17 @@ export default function SubmitButton({ label }: SubmitButtonProps) {
 }
 
 const StyledButton = styled.button`
+  width: 100%;
   padding: 10px;
-  font-size: 15px;
+  background-color: #6dcef5;
   color: white;
-  background-color: #222;
+  font-size: 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.5s ease;
+
   &:hover {
-    background-color: #ccc;
+    background-color: #5bb3dc;
   }
 `;

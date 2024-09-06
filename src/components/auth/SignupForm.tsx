@@ -116,7 +116,9 @@ function SignupForm() {
         onChange={handleChange}
         required
       />
-      <SubmitButton label="회원가입" />
+      <SubmitButtonContainer>
+        <SubmitButton label="회원가입" />
+      </SubmitButtonContainer>
     </FormContainer>
   );
 }
@@ -126,9 +128,13 @@ export default SignupForm;
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 100%;
   margin: auto;
   padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
+`;
+
+const SubmitButtonContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 `;
