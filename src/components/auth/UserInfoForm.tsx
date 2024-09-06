@@ -3,7 +3,7 @@ import { getUserInfo } from "../../api/authApi";
 import { UserInfoData } from "../../types/types";
 import styled from "styled-components";
 
-function UserInfo() {
+function UserInfoForm() {
   const [userInfo, setUserInfo] = useState<UserInfoData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -38,45 +38,36 @@ function UserInfo() {
 
   return (
     userInfo && (
-      <UserInfoContainer>
-        <Title>사용자 정보</Title>
+      <FormContainer>
         <InfoItem>
-          <Label>이름:</Label> {userInfo.name} (
+          <Label>이름</Label> {userInfo.name} (
           {userInfo.gender === "MALE" ? "남" : "여"})
         </InfoItem>
         <InfoItem>
-          <Label>생년월일:</Label> {userInfo.birthday}
+          <Label>생년월일</Label> {userInfo.birthday}
         </InfoItem>
         <InfoItem>
-          <Label>아이디:</Label> {userInfo.userId}
+          <Label>아이디</Label> {userInfo.userId}
         </InfoItem>
         <InfoItem>
-          <Label>이메일:</Label> {userInfo.email}
+          <Label>이메일</Label> {userInfo.email}
         </InfoItem>
         <InfoItem>
-          <Label>전화번호:</Label> {userInfo.phone}
+          <Label>전화번호</Label> {userInfo.phone}
         </InfoItem>
-      </UserInfoContainer>
+      </FormContainer>
     )
   );
 }
 
-export default UserInfo;
+export default UserInfoForm;
 
-const UserInfoContainer = styled.div`
-  max-width: 500px;
-  margin: 100px auto;
-  padding: 40px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  margin-bottom: 20px;
-  color: #6dcef5;
-  font-size: 24px;
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
 `;
 
 const InfoItem = styled.div`
@@ -88,6 +79,8 @@ const InfoItem = styled.div`
 
 const Label = styled.span`
   font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
   color: #333;
 `;
 

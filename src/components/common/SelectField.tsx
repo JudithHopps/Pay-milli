@@ -45,6 +45,7 @@ const SelectWrapper = styled.div`
 `;
 
 const StyledLabel = styled.label`
+  font-weight: bold;
   font-size: 15px;
   margin-bottom: 5px;
   color: #333;

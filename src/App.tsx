@@ -3,7 +3,7 @@ import NotFound from "pages/NotFound";
 import Main from "pages/Main";
 import Signup from "pages/auth/Signup";
 import Login from "pages/auth/Login";
-import UserInfo from "components/auth/UserInfo";
+import UserInfo from "pages/auth/UserInfo";
 import NavBar from "components/layout/NavBar";
 
 function App() {
