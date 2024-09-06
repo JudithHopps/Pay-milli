@@ -2,7 +2,7 @@ export default function Main() {
   return (
     <>
       <div>
-        <p>main</p>
+        <p>{"main"}</p>
       </div>
     </>
   );

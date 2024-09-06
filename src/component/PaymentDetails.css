@@ -1,0 +1,10 @@
+.payment-details {
+    margin-top: 20px;
+  }
+  
+  .payment-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  

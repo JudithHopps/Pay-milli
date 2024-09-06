@@ -1,0 +1,50 @@
+.payment-item {
+    background-color: #f0f4ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-item-header {
+    margin-bottom: 8px;
+  }
+  
+  .payment-date {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .payment-item-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .payment-item-detail {
+    display: flex;
+    align-items: center;
+  }
+  
+  .payment-item-name {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .payment-item-amount {
+    font-size: 16px;
+  }
+  
+  .payment-item-cards {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-card-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
