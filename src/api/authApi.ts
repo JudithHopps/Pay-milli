@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-import { SignupFormData, LoginFormData } from "../types/types";
+import { SignupFormData, LoginFormData } from "../types/authTypes";
 
 // 회원가입 API
 export const signup = async (formData: SignupFormData) => {
