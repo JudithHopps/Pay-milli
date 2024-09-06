@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getUserInfo } from "../../api/authApi";
-import { UserInfoData } from "../../types/types";
+import { UserInfoData } from "../../types/authTypes";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function UserInfoForm() {
+export default function UserInfoForm() {
   const [userInfo, setUserInfo] = useState<UserInfoData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -69,8 +69,6 @@ function UserInfoForm() {
     )
   );
 }
-
-export default UserInfoForm;
 
 const FormContainer = styled.form`
   display: flex;

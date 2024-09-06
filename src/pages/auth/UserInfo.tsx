@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import UserInfoForm from "../../components/auth/UserInfoForm";
 
-function UserInfo() {
+export default function UserInfo() {
   return (
     <UserInfoContainer>
       <UserInfoTitle>사용자 정보</UserInfoTitle>
@@ -9,8 +9,6 @@ function UserInfo() {
     </UserInfoContainer>
   );
 }
-
-export default UserInfo;
 
 const UserInfoContainer = styled.div`
   max-width: 400px;

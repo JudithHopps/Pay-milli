@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { login } from "../../api/authApi";
-import { LoginFormData } from "../../types/types";
+import { LoginFormData } from "../../types/authTypes";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
 
-function LoginForm() {
+export default function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
     userId: "",
     password: "",
@@ -61,8 +61,6 @@ function LoginForm() {
     </FormContainer>
   );
 }
-
-export default LoginForm;
 
 const FormContainer = styled.form`
   display: flex;

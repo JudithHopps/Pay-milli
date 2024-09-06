@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { signup } from "../../api/authApi";
-import { SignupFormData } from "../../types/types";
+import { SignupFormData } from "../../types/authTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
@@ -11,7 +11,7 @@ enum GenderType {
   MALE = "MALE",
 }
 
-function SignupForm() {
+export default function SignupForm() {
   const [formData, setFormData] = useState<SignupFormData>({
     userId: "",
     name: "",
@@ -154,8 +154,6 @@ function SignupForm() {
     </FormContainer>
   );
 }
-
-export default SignupForm;
 
 const FormContainer = styled.form`
   display: flex;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../api/authApi";
 
-function Logout() {
+export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,5 +24,3 @@ function Logout() {
 
   return <div>로그아웃 중...</div>;
 }
-
-export default Logout;

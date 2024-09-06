@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SignupForm from "../../components/auth/SignupForm";
 
-function Signup() {
+export default function Signup() {
   return (
     <SignupContainer>
       <SignupTitle>회원가입</SignupTitle>
@@ -9,8 +9,6 @@ function Signup() {
     </SignupContainer>
   );
 }
-
-export default Signup;
 
 const SignupContainer = styled.div`
   max-width: 400px;

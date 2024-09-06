@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import LoginForm from "../../components/auth/LoginForm";
 
-function Login() {
+export default function Login() {
   return (
     <LoginContainer>
       <LoginTitle>로그인</LoginTitle>
@@ -9,8 +9,6 @@ function Login() {
     </LoginContainer>
   );
 }
-
-export default Login;
 
 const LoginContainer = styled.div`
   max-width: 400px;
