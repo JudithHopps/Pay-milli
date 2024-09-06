@@ -6,6 +6,8 @@ import Login from "pages/auth/Login";
 import Logout from "pages/auth/Logout";
 import UserInfo from "pages/auth/UserInfo";
 import NavBar from "components/layout/NavBar";
+import Payment from "pages/payment/Payment";
+import RefundProcess from "pages/refund/RefundProcess";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/userinfo" element={<UserInfo />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/refund" element={<RefundProcess />} />
         </Routes>
       </div>
     </Router>
