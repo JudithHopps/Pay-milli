@@ -8,12 +8,15 @@ import UserInfo from "pages/auth/UserInfo";
 import NavBar from "components/layout/NavBar";
 import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
+import styled from "styled-components";
 
 function App() {
   return (
     <Router>
       <div>
-        <NavBar />
+        <StyledNavBar>
+          <NavBar />
+        </StyledNavBar>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="*" element={<NotFound />} />
@@ -30,3 +33,7 @@ function App() {
 }
 
 export default App;
+
+const StyledNavBar = styled.div`
+  margin-bottom: 50px;
+`;
