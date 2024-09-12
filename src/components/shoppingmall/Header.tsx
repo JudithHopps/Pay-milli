@@ -21,7 +21,7 @@ const HeaderComponent: React.FC = () => {
           style={{ width: 194, height: 70 }}
         />
       </Link>
-      <Link to="/mypage/shoppingBasket">
+      <Link to="/mall/basket">
         <img
           src={"/img/shoppingCartIcon.jpeg"}
           alt="장바구니 아이콘"
