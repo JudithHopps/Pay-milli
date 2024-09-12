@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { login } from "../../api/authApi";
-import { LoginFormData } from "../../types/authTypes";
+import { login } from "../../api/memberApi";
+import { LoginFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
-    userId: "",
+    memberId: "",
     password: "",
   });
 
@@ -43,7 +43,7 @@ export default function LoginForm() {
         label="아이디"
         name="userId"
         type="text"
-        value={formData.userId}
+        value={formData.memberId}
         onChange={handleChange}
         required
       />

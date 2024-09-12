@@ -1,16 +1,16 @@
 import axiosInstance from "./axiosInstance";
-import { SignupFormData, LoginFormData } from "../types/authTypes";
+import { SignupFormData, LoginFormData } from "../types/memberTypes";
 
 // 회원가입 API
 export const signup = async (formData: SignupFormData) => {
-  const response = await axiosInstance.post("/user/join", formData);
+  const response = await axiosInstance.post("/member/join", formData);
   return response.data;
 };
 
 // 로그인 API
 export const login = async (formData: LoginFormData) => {
   const response = await axiosInstance.post<{ accessToken: string }>(
-    "/user/login",
+    "/member/login",
     formData,
   );
   return response.data;
@@ -19,7 +19,7 @@ export const login = async (formData: LoginFormData) => {
 // 로그아웃 API
 export const logout = async (accessToken: string) => {
   const response = await axiosInstance.post(
-    "/user/logout",
+    "/member/logout",
     {},
     {
       headers: {
@@ -31,8 +31,8 @@ export const logout = async (accessToken: string) => {
 };
 
 // 회원 정보 조회 API
-export const getUserInfo = async (accessToken: string) => {
-  const response = await axiosInstance.get("/user/info", {
+export const getMemberInfo = async (accessToken: string) => {
+  const response = await axiosInstance.get("/member/info", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

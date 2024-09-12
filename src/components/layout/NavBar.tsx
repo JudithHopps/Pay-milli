@@ -12,19 +12,19 @@ export default function NavBar() {
   return (
     <Nav>
       <TopNavBar>
-        <UserLinks>
+        <MemberLinks>
           {isLogin ? (
             <>
-              <UserNavLink to="/userinfo">내 정보</UserNavLink>
-              <UserNavLink to="/logout">로그아웃</UserNavLink>
+              <MemberNavLink to="/Memberinfo">내 정보</MemberNavLink>
+              <MemberNavLink to="/logout">로그아웃</MemberNavLink>
             </>
           ) : (
             <>
-              <UserNavLink to="/login">로그인</UserNavLink>
-              <UserNavLink to="/signup">회원가입</UserNavLink>
+              <MemberNavLink to="/login">로그인</MemberNavLink>
+              <MemberNavLink to="/signup">회원가입</MemberNavLink>
             </>
           )}
-        </UserLinks>
+        </MemberLinks>
       </TopNavBar>
 
       <HeaderContainer>
@@ -54,13 +54,13 @@ const TopNavBar = styled.nav`
   background-color: #fff;
 `;
 
-const UserLinks = styled.div`
+const MemberLinks = styled.div`
   display: flex;
   margin-right: 100px;
   gap: 20px;
 `;
 
-const UserNavLink = styled(Link)`
+const MemberNavLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   color: #222;
