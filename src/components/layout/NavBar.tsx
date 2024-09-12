@@ -10,28 +10,38 @@ export default function NavBar() {
   }, []);
 
   return (
-    <StyledNav>
-      <Links>
-        <StyledLink to="/">홈</StyledLink>
-        {isLogin ? (
-          <>
-            <StyledLink to="/userinfo">내 정보</StyledLink>
-            <StyledLink to="/logout">로그아웃</StyledLink>
-          </>
-        ) : (
-          <>
-            <StyledLink to="/userinfo">내 정보</StyledLink>
-            <StyledLink to="/login">로그인</StyledLink>
-            <StyledLink to="/signup">회원가입</StyledLink>
-          </>
-        )}
-      </Links>
-    </StyledNav>
+    <>
+      <StyledNav>
+        <Links>
+          {isLogin ? (
+            <>
+              <StyledLink to="/userinfo">내 정보</StyledLink>
+              <StyledLink to="/logout">로그아웃</StyledLink>
+            </>
+          ) : (
+            <>
+              <StyledLink to="/login">로그인</StyledLink>
+              <StyledLink to="/signup">회원가입</StyledLink>
+            </>
+          )}
+        </Links>
+      </StyledNav>
+
+      <HeaderContainer>
+        <Logo>{"PAY-milli"}</Logo>
+
+        <Nav>
+          <StyledLink2 to={"/"}>{"서비스 소개"}</StyledLink2>
+          <StyledLink2 to={"/paymenthistory"}>{"전체 결제 내역"}</StyledLink2>
+          <StyledLink2 to={"/cardmanagement"}>{"내 카드 관리"}</StyledLink2>
+        </Nav>
+      </HeaderContainer>
+    </>
   );
 }
 
 const StyledNav = styled.nav`
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -71,5 +81,33 @@ const StyledLink = styled(Link)`
 
   &:hover {
     color: #ccc;
+  }
+`;
+
+const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 2px solid #007bff;
+`;
+
+const Logo = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+`;
+
+const StyledLink2 = styled(Link)`
+  margin-left: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+
+  &:hover {
+    color: #007bff;
   }
 `;
