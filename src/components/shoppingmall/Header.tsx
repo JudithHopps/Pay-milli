@@ -14,7 +14,7 @@ const S = {
 const HeaderComponent: React.FC = () => {
   return (
     <S.HeaderComponent>
-      <Link to="/product">
+      <Link to="/mall/shopping">
         <img
           src={"/img/logo_shopingmall.png"}
           alt="shoppingmall Logo"

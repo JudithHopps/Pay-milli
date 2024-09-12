@@ -56,7 +56,6 @@ export default function ShoppingBasket() {
   return (
     <S.container>
       <HeaderComponent />
-      <S.title>장바구니</S.title>
       <S.pageNav> {"Home > 장바구니"}</S.pageNav>
       {!cartList || cartList.length === 0 ? (
         <DescriptionComponent description="장바구니가 비어 있습니다." />

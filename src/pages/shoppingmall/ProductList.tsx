@@ -142,10 +142,10 @@ export default function ProductList() {
     fetchData();
   }, []);
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate("/mypage/shoppingBasket"); // Navigate to the specified path
+    navigate("/mall/basket");
   };
 
   const updateCartList = (newCartList: CartType[]): void => {
