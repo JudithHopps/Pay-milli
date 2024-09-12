@@ -2,7 +2,7 @@ export default function NotFound() {
   return (
     <>
       <div>
-        <p>NotFound</p>
+        <p>{"NotFound"}</p>
       </div>
     </>
   );
