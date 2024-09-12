@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./AddCardForm.css";
+import styled from "styled-components";
 
 interface AddCardFormProps {
   onSubmit: (name: string, imageUrl: string) => void;
   onCancel: () => void;
 }
 
-const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
+export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
   const [cardType, setCardType] = useState("체크카드");
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
   const [expiryDate, setExpiryDate] = useState("");
@@ -24,9 +24,9 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <div className="add-card-form">
-      <h2>카드 정보를 입력해 주세요.</h2>
-      <div className="card-type">
+    <FormContainer>
+      <Title>카드 정보를 입력해 주세요.</Title>
+      <CardTypeContainer>
         <label>
           <input
             type="radio"
@@ -45,13 +45,13 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
           />
           신용카드
         </label>
-      </div>
+      </CardTypeContainer>
 
-      <div className="card-number">
+      <CardNumberContainer>
         <label>카드 번호</label>
         <div>
           {cardNumber.map((num, index) => (
-            <input
+            <CardInput
               key={index}
               type="text"
               maxLength={4}
@@ -60,44 +60,104 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ onSubmit, onCancel }) => {
             />
           ))}
         </div>
-      </div>
+      </CardNumberContainer>
 
-      <div className="expiry-date">
+      <InputContainer>
         <label>유효기간</label>
-        <input
+        <InputField
           type="text"
           placeholder="MM/YY"
           value={expiryDate}
           onChange={(e) => setExpiryDate(e.target.value)}
         />
-      </div>
+      </InputContainer>
 
-      <div className="cvc">
+      <InputContainer>
         <label>CVC</label>
-        <input
+        <InputField
           type="text"
           maxLength={3}
           value={cvc}
           onChange={(e) => setCvc(e.target.value)}
         />
-      </div>
+      </InputContainer>
 
-      <div className="password">
+      <InputContainer>
         <label>카드 비밀번호</label>
-        <input
+        <InputField
           type="password"
           maxLength={4}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
+      </InputContainer>
 
-      <div className="submit-section">
-        <button onClick={handleSubmit}>등록</button>
-        <button onClick={onCancel}>취소</button>
-      </div>
-    </div>
+      <ButtonContainer>
+        <Button onClick={handleSubmit}>등록</Button>
+        <CancelButton onClick={onCancel}>취소</CancelButton>
+      </ButtonContainer>
+    </FormContainer>
   );
-};
+}
 
-export default AddCardForm;
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+`;
+
+const Title = styled.h2`
+  font-size: 18px;
+  margin-bottom: 15px;
+`;
+
+const CardTypeContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const CardNumberContainer = styled.div`
+  margin-top: 10px;
+`;
+
+const CardInput = styled.input`
+  width: 60px;
+  padding: 5px;
+  margin-right: 5px;
+`;
+
+const InputContainer = styled.div`
+  margin-top: 10px;
+
+  label {
+    margin-bottom: 5px;
+  }
+`;
+
+const InputField = styled.input`
+  width: 100%;
+  padding: 5px;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
+const CancelButton = styled(Button)`
+  background-color: #ddd;
+  color: black;
+`;

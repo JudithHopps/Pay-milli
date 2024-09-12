@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import CardList from "../component/CardList";
-import AddCardForm from "../component/AddCardForm";
-import "./CardManagementPage.css";
+import styled from "styled-components";
+import CardList from "../../components/card/CardList";
+import AddCardForm from "../../components/card/AddCardForm";
 
-const CardManagementPage: React.FC = () => {
+// export default function 방식으로 수정
+export default function CardManagementPage() {
   const [cards, setCards] = useState([
     { id: 1, name: "신한카드", imageUrl: "/images/card1.png" },
     { id: 2, name: "국민카드", imageUrl: "/images/card2.png" },
@@ -22,24 +23,37 @@ const CardManagementPage: React.FC = () => {
   };
 
   return (
-    <div className="card-management-page">
-      <div className="left-section">
+    <CardManagementPageContainer>
+      <LeftSection>
         <CardList
           cards={cards}
           onCardClick={() => {}}
           onAddCardClick={handleAddCardClick}
         />
-      </div>
-      <div className="right-section">
+      </LeftSection>
+      <RightSection>
         {showAddCardForm && (
           <AddCardForm
             onSubmit={handleAddCardSubmit}
             onCancel={() => setShowAddCardForm(false)}
           />
         )}
-      </div>
-    </div>
+      </RightSection>
+    </CardManagementPageContainer>
   );
-};
+}
 
-export default CardManagementPage;
+// styled-components로 변환된 스타일 정의
+const CardManagementPageContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+`;
+
+const LeftSection = styled.div`
+  width: 30%;
+`;
+
+const RightSection = styled.div`
+  width: 65%;
+`;
