@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
 
 export default function PaymentHistoryPage() {
-  const payments = [
+  const Initialpaymentsdata = [
     {
       date: "2024-08-30",
       name: "Apple",
@@ -34,18 +34,18 @@ export default function PaymentHistoryPage() {
   return (
     <PaymentHistoryContainer>
       <h1>전체 결제 내역</h1>
-      <PaymentSummary>총 승인 {payments.length}건</PaymentSummary>
+      <PaymentSummary>총 승인 {Initialpaymentsdata.length}건</PaymentSummary>
       <hr />
-      {payments.length === 0 ? (
+      {Initialpaymentsdata.length === 0 ? (
         <NoData>조회된 거래내역이 없습니다.</NoData>
       ) : (
-        payments.map((payment, index) => (
+        Initialpaymentsdata.map((Initialpaymentsdata, index) => (
           <PaymentItem
             key={index}
-            date={payment.date}
-            name={payment.name}
-            amount={payment.amount}
-            cards={payment.cards}
+            date={Initialpaymentsdata.date}
+            name={Initialpaymentsdata.name}
+            amount={Initialpaymentsdata.amount}
+            cards={Initialpaymentsdata.cards}
           />
         ))
       )}
