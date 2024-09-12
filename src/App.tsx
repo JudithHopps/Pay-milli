@@ -9,7 +9,6 @@ import UserInfo from "pages/auth/UserInfo";
 import NavBar from "components/layout/NavBar";
 import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
-
 import CardManagementPage from "pages/card/CardManagementPage";
 import PaymentHistoryPage from "pages/card/PaymentHistoryPage";
 import styled from "styled-components";
@@ -18,22 +17,21 @@ function App() {
   return (
     <Router>
       <div>
-        <StyledNavBar>
-          <NavBar />
-        </StyledNavBar>
-
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/userinfo" element={<UserInfo />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/refund" element={<RefundProcess />} />
-          <Route path="/cardmanagement" element={<CardManagementPage />} />
-          <Route path="/paymenthistory" element={<PaymentHistoryPage />} />
-        </Routes>
+        <NavBar />
+        <MainContent>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/userinfo" element={<UserInfo />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/refund" element={<RefundProcess />} />
+            <Route path="/cardmanagement" element={<CardManagementPage />} />
+            <Route path="/paymenthistory" element={<PaymentHistoryPage />} />
+          </Routes>
+        </MainContent>
       </div>
     </Router>
   );
@@ -41,6 +39,6 @@ function App() {
 
 export default App;
 
-const StyledNavBar = styled.div`
-  margin-bottom: 50px;
+const MainContent = styled.div`
+  margin-top: 150px;
 `;

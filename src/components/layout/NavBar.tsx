@@ -10,42 +10,43 @@ export default function NavBar() {
   }, []);
 
   return (
-    <>
-      <StyledNav>
-        <Links>
+    <Nav>
+      <TopNavBar>
+        <UserLinks>
           {isLogin ? (
             <>
-              <StyledLink to="/userinfo">내 정보</StyledLink>
-              <StyledLink to="/logout">로그아웃</StyledLink>
+              <UserNavLink to="/userinfo">내 정보</UserNavLink>
+              <UserNavLink to="/logout">로그아웃</UserNavLink>
             </>
           ) : (
             <>
-              <StyledLink to="/login">로그인</StyledLink>
-              <StyledLink to="/signup">회원가입</StyledLink>
+              <UserNavLink to="/login">로그인</UserNavLink>
+              <UserNavLink to="/signup">회원가입</UserNavLink>
             </>
           )}
-        </Links>
-      </StyledNav>
+        </UserLinks>
+      </TopNavBar>
 
       <HeaderContainer>
-        <Logo>{"PAY-milli"}</Logo>
-
-        <Nav>
-          <StyledLink2 to={"/"}>{"서비스 소개"}</StyledLink2>
-          <StyledLink2 to={"/paymenthistory"}>{"전체 결제 내역"}</StyledLink2>
-          <StyledLink2 to={"/cardmanagement"}>{"내 카드 관리"}</StyledLink2>
-        </Nav>
+        <ServiceLinks>
+          <ServiceNavLink to="/">서비스 소개</ServiceNavLink>
+          <ServiceNavLink to="/paymenthistory">전체 결제 내역</ServiceNavLink>
+          <ServiceNavLink to="/cardmanagement">내 카드 관리</ServiceNavLink>
+        </ServiceLinks>
       </HeaderContainer>
-    </>
+    </Nav>
   );
 }
 
-const StyledNav = styled.nav`
-  // position: fixed;
+const Nav = styled.nav`
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+`;
+
+const TopNavBar = styled.nav`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -53,13 +54,13 @@ const StyledNav = styled.nav`
   background-color: #fff;
 `;
 
-const Links = styled.div`
+const UserLinks = styled.div`
   display: flex;
   margin-right: 100px;
   gap: 20px;
 `;
 
-const StyledLink = styled(Link)`
+const UserNavLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   color: #222;
@@ -88,23 +89,21 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding-bottom: 20px;
   border-bottom: 2px solid #007bff;
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const Nav = styled.nav`
+const ServiceLinks = styled.nav`
+  flex-grow: 1;
   display: flex;
+  justify-content: center;
 `;
 
-const StyledLink2 = styled(Link)`
-  margin-left: 20px;
+const ServiceNavLink = styled(Link)`
+  margin: 0px 15px;
   text-decoration: none;
   color: black;
+  font-size: 20px;
   font-weight: 500;
 
   &:hover {
