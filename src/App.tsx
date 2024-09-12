@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import NotFound from "pages/NotFound";
 import Main from "pages/Main";
 import Signup from "pages/auth/Signup";
@@ -8,6 +9,10 @@ import UserInfo from "pages/auth/UserInfo";
 import NavBar from "components/layout/NavBar";
 import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
+
+import Header from "components/layout/Header";
+import CardManagementPage from "pages/card/CardManagementPage";
+import PaymentHistoryPage from "pages/card/PaymentHistoryPage";
 import styled from "styled-components";
 
 function App() {
@@ -17,6 +22,8 @@ function App() {
         <StyledNavBar>
           <NavBar />
         </StyledNavBar>
+        <Header />
+
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="*" element={<NotFound />} />
@@ -26,6 +33,9 @@ function App() {
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/refund" element={<RefundProcess />} />
+
+          <Route path="/cardmanagement" element={<CardManagementPage />} />
+          <Route path="/paymenthistory" element={<PaymentHistoryPage />} />
         </Routes>
       </div>
     </Router>
