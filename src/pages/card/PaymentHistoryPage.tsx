@@ -9,7 +9,7 @@ export default function PaymentHistoryPage() {
       name: "Apple",
       amount: 1000000,
       cards: [
-        { cardName: "국민 A 체크카드", amount: 400000 },
+        { cardName: "국민 A ddd체크카드", amount: 400000 },
         { cardName: "신한 B 신용카드", amount: 600000 },
       ],
     },
