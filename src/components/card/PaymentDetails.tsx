@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+interface Payment {
+  date: string;
+  description: string;
+  amount: number;
+  balance: number;
+}
+
+interface PaymentDetailsProps {
+  payments: Payment[];
+}
+
 export default function PaymentDetails({ payments }: PaymentDetailsProps) {
   return (
     <PaymentDetailsContainer>
@@ -14,17 +25,6 @@ export default function PaymentDetails({ payments }: PaymentDetailsProps) {
       ))}
     </PaymentDetailsContainer>
   );
-}
-
-interface Payment {
-  date: string;
-  description: string;
-  amount: number;
-  balance: number;
-}
-
-interface PaymentDetailsProps {
-  payments: Payment[];
 }
 
 const PaymentDetailsContainer = styled.div`

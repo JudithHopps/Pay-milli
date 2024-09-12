@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
 
-// export default function 방식으로 수정
 export default function PaymentHistoryPage() {
   const payments = [
     {
@@ -55,7 +54,6 @@ export default function PaymentHistoryPage() {
   );
 }
 
-// styled-components로 변환된 스타일 정의
 const PaymentHistoryContainer = styled.div`
   margin: 20px;
   font-family: Arial, sans-serif;

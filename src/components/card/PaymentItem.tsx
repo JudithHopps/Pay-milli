@@ -1,6 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
+interface CardPayment {
+  cardName: string;
+  amount: number;
+}
+
+interface PaymentItemProps {
+  date: string;
+  name: string;
+  amount: number;
+  cards: CardPayment[];
+}
+
 export default function PaymentItem({
   date,
   name,
@@ -28,18 +40,6 @@ export default function PaymentItem({
       </PaymentItemContent>
     </PaymentItemContainer>
   );
-}
-
-interface CardPayment {
-  cardName: string;
-  amount: number;
-}
-
-interface PaymentItemProps {
-  date: string;
-  name: string;
-  amount: number;
-  cards: CardPayment[];
 }
 
 const PaymentItemContainer = styled.div`

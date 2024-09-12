@@ -1,6 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
+interface Card {
+  id: number;
+  name: string;
+  imageUrl: string;
+}
+
+interface CardListProps {
+  cards: Card[];
+  onCardClick: (cardId: number) => void;
+  onAddCardClick: () => void;
+}
+
 export default function CardList({
   cards,
   onCardClick,
@@ -18,18 +30,6 @@ export default function CardList({
       </AddCardItem>
     </CardListContainer>
   );
-}
-
-interface Card {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
-
-interface CardListProps {
-  cards: Card[];
-  onCardClick: (cardId: number) => void;
-  onAddCardClick: () => void;
 }
 
 const CardListContainer = styled.div`

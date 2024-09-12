@@ -3,7 +3,6 @@ import styled from "styled-components";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
 
-// export default function 방식으로 수정
 export default function CardManagementPage() {
   const [cards, setCards] = useState([
     { id: 1, name: "신한카드", imageUrl: "/images/card1.png" },
@@ -43,7 +42,6 @@ export default function CardManagementPage() {
   );
 }
 
-// styled-components로 변환된 스타일 정의
 const CardManagementPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
