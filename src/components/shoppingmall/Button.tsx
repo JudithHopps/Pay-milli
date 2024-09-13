@@ -1,26 +1,26 @@
-import React, { ReactNode, CSSProperties } from 'react'
-import styled from 'styled-components'
+import React, { ReactNode, CSSProperties } from "react";
+import styled from "styled-components";
 
 interface ButtonComponentProps {
-  children: ReactNode
-  importance?: 'high' | 'medium' | 'low'
-  width?: string
-  height?: string
-  onClick?: () => void
+  children: ReactNode;
+  importance?: "high" | "medium" | "low";
+  width?: string;
+  height?: string;
+  onClick?: () => void;
 }
 
-const getButtonColor = (importance?: 'high' | 'medium' | 'low'): string => {
+const getButtonColor = (importance?: "high" | "medium" | "low"): string => {
   switch (importance) {
-    case 'high':
-      return '#ff6500;'
-    case 'medium':
-      return '#ff9c00;'
-    case 'low':
-      return '#aaa'
+    case "high":
+      return "#ff6500;";
+    case "medium":
+      return "#ff9c00;";
+    case "low":
+      return "#aaa";
     default:
-      return 'white'
+      return "white";
   }
-}
+};
 
 const S = {
   ButtonComponent: styled.div<ButtonComponentProps>`
@@ -28,15 +28,16 @@ const S = {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 12px;
     background-color: ${(props) => getButtonColor(props.importance)};
     ${(props) => props.width && `width: ${props.width};`}
     ${(props) => props.height && `height: ${props.height};`}
     color: white;
     text-align: center;
     cursor: pointer;
+    border-radius: 20px;
   `,
-}
+};
 
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
   children,
@@ -54,7 +55,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
     >
       {children}
     </S.ButtonComponent>
-  )
-}
+  );
+};
 
-export default ButtonComponent
+export default ButtonComponent;
