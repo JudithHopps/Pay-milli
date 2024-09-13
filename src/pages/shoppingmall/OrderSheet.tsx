@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
-import HeaderComponent from "components/shoppingmall/Header";
 import ButtonComponent from "components/shoppingmall/Button";
 
 interface CartType {
@@ -19,7 +18,7 @@ const THE_DELIVERY_CHARGE = 3000;
 
 export default function OrderSheet() {
   const [cartList, setCartList] = useState<CartType[] | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<string>("pay-milly");
+  const [paymentMethod, setPaymentMethod] = useState<string>("pay-milli");
 
   useEffect(() => {
     const preCartList = localStorage.getItem("cartList");
@@ -76,13 +75,20 @@ export default function OrderSheet() {
             <S.radioOption>
               <input
                 type="radio"
-                id="pay-milly"
+                id="pay-milli"
                 name="payment-method"
-                value="pay-milly"
-                checked={paymentMethod === "pay-milly"}
+                value="pay-milli"
+                checked={paymentMethod === "pay-milli"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
-              <label htmlFor="pay-milly">Pay-milly</label>
+              <S.label htmlFor="pay-milli">
+                <img
+                  src="/img/logo_paymilli.png"
+                  width={70}
+                  alt="Pay-milli logo"
+                />
+                <span>pay-milli</span>
+              </S.label>
             </S.radioOption>
             <S.radioOption>
               <input
@@ -93,7 +99,7 @@ export default function OrderSheet() {
                 checked={paymentMethod === "credit-card"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
-              <label htmlFor="credit-card">일반 카드 결제</label>
+              <S.label htmlFor="credit-card">일반 카드 결제</S.label>
             </S.radioOption>
             <S.radioOption>
               <input
@@ -104,10 +110,19 @@ export default function OrderSheet() {
                 checked={paymentMethod === "bank-transfer"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
-              <label htmlFor="bank-transfer">계좌이체</label>
+              <S.label htmlFor="bank-transfer">계좌이체</S.label>
             </S.radioOption>
           </S.paymentOptions>
         </S.orderSummary>
+
+        <S.orderFooter>
+          <S.footerText>
+            약관 및 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
+          </S.footerText>
+          <ButtonComponent importance="medium">
+            <S.buttonText>{totalCost.toLocaleString()} 결제하기</S.buttonText>
+          </ButtonComponent>
+        </S.orderFooter>
       </S.container>
     </>
   );
@@ -118,10 +133,7 @@ const S = {
     background-color: #f3f5f7;
     padding: 20px;
     border-radius: 8px;
-  `,
-  title: styled.h1`
-    font-size: 1.7vw;
-    margin: 70px 0 7px 0;
+    padding-bottom: 100px; /* Adjust this if necessary */
   `,
   pageNav: styled.p`
     font-size: 15px;
@@ -131,7 +143,7 @@ const S = {
     background-color: #fff;
     border-radius: 4px;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0px;
   `,
   orderSummary: styled.div`
     background-color: #fff;
@@ -183,13 +195,47 @@ const S = {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+  `,
+  label: styled.label`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
 
-    input[type="radio"] {
+    img {
       margin-right: 10px;
     }
 
-    label {
+    span {
       font-size: 16px;
     }
+  `,
+  orderFooter: styled.div`
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    background-color: #fff; /* Optional: background color for footer */
+    border-top: 1px solid #ddd; /* Optional: border for visual clarity */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Optional: shadow for visual clarity */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0 20px;
+  `,
+  footerText: styled.span`
+    font-size: 14px;
+    color: #767678;
+  `,
+  buttonText: styled.p`
+    color: #fff; /* Button text color */
+    margin: 0;
   `,
 };
