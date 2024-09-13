@@ -19,6 +19,7 @@ const THE_DELIVERY_CHARGE = 3000;
 
 export default function OrderSheet() {
   const [cartList, setCartList] = useState<CartType[] | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<string>("pay-milly");
 
   useEffect(() => {
     const preCartList = localStorage.getItem("cartList");
@@ -68,6 +69,45 @@ export default function OrderSheet() {
             </S.totalCost>
           </S.orderSummary>
         )}
+
+        <S.orderSummary>
+          <S.orderTitle>결제수단</S.orderTitle>
+          <S.paymentOptions>
+            <S.radioOption>
+              <input
+                type="radio"
+                id="pay-milly"
+                name="payment-method"
+                value="pay-milly"
+                checked={paymentMethod === "pay-milly"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <label htmlFor="pay-milly">Pay-milly</label>
+            </S.radioOption>
+            <S.radioOption>
+              <input
+                type="radio"
+                id="credit-card"
+                name="payment-method"
+                value="credit-card"
+                checked={paymentMethod === "credit-card"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <label htmlFor="credit-card">일반 카드 결제</label>
+            </S.radioOption>
+            <S.radioOption>
+              <input
+                type="radio"
+                id="bank-transfer"
+                name="payment-method"
+                value="bank-transfer"
+                checked={paymentMethod === "bank-transfer"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <label htmlFor="bank-transfer">계좌이체</label>
+            </S.radioOption>
+          </S.paymentOptions>
+        </S.orderSummary>
       </S.container>
     </>
   );
@@ -91,12 +131,14 @@ const S = {
     background-color: #fff;
     border-radius: 4px;
     text-align: center;
+    padding: 10px;
   `,
   orderSummary: styled.div`
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
   `,
   orderTitle: styled.h2`
     font-size: 18px;
@@ -133,5 +175,21 @@ const S = {
     font-size: 16px;
     font-weight: bold;
     text-align: right;
+  `,
+  paymentOptions: styled.div`
+    margin-top: 10px;
+  `,
+  radioOption: styled.div`
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
   `,
 };
