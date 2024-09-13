@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getUserInfo } from "../../api/authApi";
-import { UserInfoData } from "../../types/authTypes";
+import { getMemberInfo } from "../../api/memberApi";
+import { MemberInfoData } from "../../types/memberTypes";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function UserInfoForm() {
-  const [userInfo, setUserInfo] = useState<UserInfoData | null>(null);
+export default function MemberInfoForm() {
+  const [memberInfo, setMemberInfo] = useState<MemberInfoData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
+    const fetchMemberInfo = async () => {
       const accessToken = localStorage.getItem("accessToken");
 
       if (!accessToken) {
@@ -20,14 +20,14 @@ export default function UserInfoForm() {
       }
 
       try {
-        const data = await getUserInfo(accessToken);
-        setUserInfo(data);
+        const data = await getMemberInfo(accessToken);
+        setMemberInfo(data);
       } catch (err) {
         console.error(err);
-        // alert("유저정보 가져오기 실패");
+        // alert("멤버정보 가져오기 실패");
 
-        setUserInfo({
-          userId: "gilddong",
+        setMemberInfo({
+          memberId: "gilddong",
           name: "홍길동",
           email: "gilddong@example.com",
           birthday: "1990-01-01",
@@ -39,7 +39,7 @@ export default function UserInfoForm() {
       }
     };
 
-    fetchUserInfo();
+    fetchMemberInfo();
   }, [navigate]);
 
   if (loading) {
@@ -47,23 +47,23 @@ export default function UserInfoForm() {
   }
 
   return (
-    userInfo && (
+    memberInfo && (
       <FormContainer>
         <InfoItem>
-          <Label>이름</Label> {userInfo.name} (
-          {userInfo.gender === "MALE" ? "남" : "여"})
+          <Label>이름</Label> {memberInfo.name} (
+          {memberInfo.gender === "MALE" ? "남" : "여"})
         </InfoItem>
         <InfoItem>
-          <Label>생년월일</Label> {userInfo.birthday}
+          <Label>생년월일</Label> {memberInfo.birthday}
         </InfoItem>
         <InfoItem>
-          <Label>아이디</Label> {userInfo.userId}
+          <Label>아이디</Label> {memberInfo.memberId}
         </InfoItem>
         <InfoItem>
-          <Label>이메일</Label> {userInfo.email}
+          <Label>이메일</Label> {memberInfo.email}
         </InfoItem>
         <InfoItem>
-          <Label>전화번호</Label> {userInfo.phone}
+          <Label>전화번호</Label> {memberInfo.phone}
         </InfoItem>
       </FormContainer>
     )

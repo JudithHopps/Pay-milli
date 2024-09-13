@@ -270,6 +270,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   color: white;
   font-size: 20px;
-  position: fixed;
+  // position: fixed;
   bottom: 50px;
+  margin-bottom: 50px;
 `;

@@ -74,9 +74,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   width: 100%;
   flex-direction: column;
+  margin-top: 50px;
 `;
 
 const Content = styled.div`
@@ -91,7 +91,7 @@ const Content = styled.div`
 const BackButton = styled.button`
   position: absolute;
   top: 15px;
-  right: 15px;
+  left: 15px;
   background: none;
   border: none;
 `;

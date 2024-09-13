@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import Header from "./Header";
 
 export default function NavBar() {
   const [isLogin, setIsLogin] = useState(false);
@@ -10,32 +11,37 @@ export default function NavBar() {
   }, []);
 
   return (
-    <StyledNav>
-      <Links>
-        <StyledLink to="/">홈</StyledLink>
-        {isLogin ? (
-          <>
-            <StyledLink to="/userinfo">내 정보</StyledLink>
-            <StyledLink to="/logout">로그아웃</StyledLink>
-          </>
-        ) : (
-          <>
-            <StyledLink to="/userinfo">내 정보</StyledLink>
-            <StyledLink to="/login">로그인</StyledLink>
-            <StyledLink to="/signup">회원가입</StyledLink>
-          </>
-        )}
-      </Links>
-    </StyledNav>
+    <Nav>
+      <TopNavBar>
+        <MemberLinks>
+          {isLogin ? (
+            <>
+              <MemberNavLink to="/Memberinfo">내 정보</MemberNavLink>
+              <MemberNavLink to="/logout">로그아웃</MemberNavLink>
+            </>
+          ) : (
+            <>
+              <MemberNavLink to="/login">로그인</MemberNavLink>
+              <MemberNavLink to="/signup">회원가입</MemberNavLink>
+            </>
+          )}
+        </MemberLinks>
+      </TopNavBar>
+
+      <Header />
+    </Nav>
   );
 }
 
-const StyledNav = styled.nav`
+const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
+`;
+
+const TopNavBar = styled.nav`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -43,13 +49,13 @@ const StyledNav = styled.nav`
   background-color: #fff;
 `;
 
-const Links = styled.div`
+const MemberLinks = styled.div`
   display: flex;
   margin-right: 100px;
   gap: 20px;
 `;
 
-const StyledLink = styled(Link)`
+const MemberNavLink = styled(Link)`
   text-decoration: none;
   font-size: 12px;
   color: #222;

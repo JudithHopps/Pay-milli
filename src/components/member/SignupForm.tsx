@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { signup } from "../../api/authApi";
-import { SignupFormData } from "../../types/authTypes";
+import { signup } from "../../api/memberApi";
+import { SignupFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
@@ -13,7 +13,7 @@ enum GenderType {
 
 export default function SignupForm() {
   const [formData, setFormData] = useState<SignupFormData>({
-    userId: "",
+    memberId: "",
     name: "",
     email: "",
     password: "",
@@ -95,9 +95,9 @@ export default function SignupForm() {
       />
       <InputField
         label="아이디"
-        name="userId"
+        name="memberId"
         type="text"
-        value={formData.userId}
+        value={formData.memberId}
         onChange={handleChange}
         required
         placeholder="gwonil"
