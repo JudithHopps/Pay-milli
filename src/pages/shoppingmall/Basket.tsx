@@ -138,29 +138,24 @@ export default function ShoppingBasket() {
           </S.tbody>
 
           <S.tfoot>
-            <S.th colspan={4}>
-              <S.footContainer>
-                <S.priceDescription>
-                  <S.text>총 금액</S.text>
-                  <S.boldText>{totalCost}원</S.boldText>
-                  <S.symbol>+</S.symbol>
-                  <S.text>배송비</S.text>
-                  <S.boldText>
-                    {totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE}원
-                  </S.boldText>
-                  <S.text2>{"(3만원이상 구매시 무료배송)"}</S.text2>
-                  <S.symbol>=</S.symbol>
-                  <S.text>결제 금액</S.text>
-                  <S.boldText>
-                    {totalCost + (totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE)}
-                    원
-                  </S.boldText>
-                </S.priceDescription>
-                <ButtonComponent importance="medium" onClick={handleNavigation}>
-                  <p>결제하기</p>
-                </ButtonComponent>
-              </S.footContainer>
-            </S.th>
+            <S.priceDescription>
+              <S.text>총 금액</S.text>
+              <S.boldText>{totalCost}원</S.boldText>
+              <S.symbol>+</S.symbol>
+              <S.text>배송비</S.text>
+              <S.boldText>
+                {totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE}원
+              </S.boldText>
+              <S.text2>{"(3만원이상 구매시 무료배송)"}</S.text2>
+              <S.symbol>=</S.symbol>
+              <S.text>결제 금액</S.text>
+              <S.boldText>
+                {totalCost + (totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE)}원
+              </S.boldText>
+            </S.priceDescription>
+            <ButtonComponent importance="medium" onClick={handleNavigation}>
+              <p>결제하기</p>
+            </ButtonComponent>
           </S.tfoot>
         </S.table>
       )}
@@ -230,12 +225,13 @@ const S = {
   `,
 
   tfoot: styled.tfoot`
+    height: 80px;
     display: flex;
     background-color: #fafafa;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    padding: 15px;
+    margin-bottom: 15px;
     text-align: center;
     th {
       display: table-footer-group;
@@ -307,6 +303,7 @@ const S = {
     border-right: 1px solid #e0e0e0;
   `,
   footContainer: styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
     text-align: center;
@@ -315,6 +312,7 @@ const S = {
     flex-wrap: nowrap;
     justify-content: space-between;
   `,
+
   text: styled.span`
     margin-right: 10px;
     font-weight: 400;

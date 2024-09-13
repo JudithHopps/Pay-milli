@@ -28,7 +28,7 @@ const S = {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 5px 12px;
+    padding: 5px 15px;
     background-color: ${(props) => getButtonColor(props.importance)};
     ${(props) => props.width && `width: ${props.width};`}
     ${(props) => props.height && `height: ${props.height};`}
