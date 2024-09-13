@@ -1,5 +1,5 @@
 export interface SignupFormData {
-  userId: string;
+  memberId: string;
   name: string;
   email: string;
   password: string;
@@ -10,12 +10,12 @@ export interface SignupFormData {
 }
 
 export interface LoginFormData {
-  userId: string;
+  memberId: string;
   password: string;
 }
 
-export interface UserInfoData {
-  userId: string;
+export interface MemberInfoData {
+  memberId: string;
   name: string;
   email: string;
   birthday: string;

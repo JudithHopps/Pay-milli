@@ -157,7 +157,7 @@ export default function Payment() {
 
   const handlePasswordSubmit = (password: string) => {
     // todo : 비밀번호 확인 로직 추가!!
-    if (password === "1234") {
+    if (password === "123456") {
       console.log("Password correct. Proceed with payment:", cardAllocations);
       setIsProcessing(true);
       setShowPassword(false);
@@ -270,6 +270,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   color: white;
   font-size: 20px;
-  position: fixed;
+  // position: fixed;
   bottom: 50px;
+  margin-bottom: 50px;
 `;
