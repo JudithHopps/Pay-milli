@@ -5,6 +5,7 @@ import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
 import ProductList from "pages/shoppingmall/ProductList";
 import ShoppingBasket from "pages/shoppingmall/Basket";
+import OrderSheet from "pages/shoppingmall/OrderSheet";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/refund" element={<RefundProcess />} />
         <Route path="/mall/shopping" element={<ProductList />} />
         <Route path="/mall/basket" element={<ShoppingBasket />} />
+        <Route path="/mall/order" element={<OrderSheet />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
 import HeaderComponent from "components/shoppingmall/Header";
 import ButtonComponent from "components/shoppingmall/Button";
+import { useNavigate } from "react-router-dom";
 
 interface CartType {
   id: string;
@@ -26,6 +27,7 @@ export default function ShoppingBasket() {
       setCartList(JSON.parse(preCartList));
     }
   }, []);
+  const navigate = useNavigate();
 
   const updateCartList = (newCartList: CartType[]): void => {
     setCartList(newCartList);
@@ -56,6 +58,7 @@ export default function ShoppingBasket() {
 
   const handleNavigation = () => {
     // todo : 결제 페이지 넘어가기
+    navigate("/mall/order");
   };
 
   return (
