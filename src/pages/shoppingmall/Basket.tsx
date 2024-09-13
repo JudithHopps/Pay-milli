@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
 import HeaderComponent from "components/shoppingmall/Header";
+import ButtonComponent from "components/shoppingmall/Button";
 
 interface CartType {
   id: string;
@@ -52,6 +53,10 @@ export default function ShoppingBasket() {
       0
     );
   }, [cartList]);
+
+  const handleNavigation = () => {
+    // todo : 결제 페이지 넘어가기
+  };
 
   return (
     <S.container>
@@ -135,19 +140,25 @@ export default function ShoppingBasket() {
           <S.tfoot>
             <S.th colspan={4}>
               <S.footContainer>
-                <S.text>총 금액</S.text>
-                <S.boldText>{totalCost}원</S.boldText>
-                <S.symbol>+</S.symbol>
-                <S.text>배송비</S.text>
-                <S.boldText>
-                  {totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE}원
-                </S.boldText>
-                <S.text2>{"(3만원이상 구매시 무료배송)"}</S.text2>
-                <S.symbol>=</S.symbol>
-                <S.text>결제 금액</S.text>
-                <S.boldText>
-                  {totalCost + (totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE)}원
-                </S.boldText>
+                <S.priceDescription>
+                  <S.text>총 금액</S.text>
+                  <S.boldText>{totalCost}원</S.boldText>
+                  <S.symbol>+</S.symbol>
+                  <S.text>배송비</S.text>
+                  <S.boldText>
+                    {totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE}원
+                  </S.boldText>
+                  <S.text2>{"(3만원이상 구매시 무료배송)"}</S.text2>
+                  <S.symbol>=</S.symbol>
+                  <S.text>결제 금액</S.text>
+                  <S.boldText>
+                    {totalCost + (totalCost >= 30000 ? 0 : THE_DELIVERY_CHARGE)}
+                    원
+                  </S.boldText>
+                </S.priceDescription>
+                <ButtonComponent importance="medium" onClick={handleNavigation}>
+                  <p>결제하기</p>
+                </ButtonComponent>
               </S.footContainer>
             </S.th>
           </S.tfoot>
@@ -298,12 +309,11 @@ const S = {
   footContainer: styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
     text-align: center;
     border-bottom: 0;
     padding: 3px;
     flex-wrap: nowrap;
+    justify-content: space-between;
   `,
   text: styled.span`
     margin-right: 10px;
@@ -361,5 +371,9 @@ const S = {
     background-color: #ff6500;
     width: ${(props) => props.width}%;
     transition: width 0.3s ease-in-out;
+  `,
+  priceDescription: styled.div`
+    position: flex;
+    flex-direction: row;
   `,
 };
