@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
 import ButtonComponent from "components/shoppingmall/Button";
+import { useNavigate } from "react-router-dom";
 
 interface CartType {
   id: string;
@@ -19,6 +20,7 @@ const THE_DELIVERY_CHARGE = 3000;
 export default function OrderSheet() {
   const [cartList, setCartList] = useState<CartType[] | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<string>("pay-milli");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const preCartList = localStorage.getItem("cartList");
@@ -39,6 +41,17 @@ export default function OrderSheet() {
       0
     );
   }, [cartList]);
+
+  window.notifyPaymilli = () => {
+    console.log("결제 완료");
+    const paytoken = "TEST_ABC";
+    navigate(`/mall/order/complete?paytoken=${paytoken}`);
+  };
+
+  const openPayPopup = () => {
+    const popupOptions = "width=800,height=800,scrollbars=yes";
+    window.open(`/payment?amount=${totalCost}`, "paymentWindow", popupOptions);
+  };
 
   return (
     <>
@@ -120,7 +133,9 @@ export default function OrderSheet() {
             약관 및 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
           </S.footerText>
           <ButtonComponent importance="medium">
-            <S.buttonText>{totalCost.toLocaleString()} 결제하기</S.buttonText>
+            <S.buttonText onClick={openPayPopup}>
+              {totalCost.toLocaleString()} 결제하기
+            </S.buttonText>
           </ButtonComponent>
         </S.orderFooter>
       </S.container>
