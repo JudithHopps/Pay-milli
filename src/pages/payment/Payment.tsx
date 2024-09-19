@@ -155,12 +155,20 @@ export default function Payment() {
     console.log("결제 처리 시작:", cardAllocations);
   };
 
+  const notifyParentAndClose = () => {
+    if (window.opener && typeof window.opener.notifyPaymilli === "function") {
+      window.opener.notifyPaymilli(); // 부모 창의 함수 호출
+    }
+    window.close();
+  };
+
   const handlePasswordSubmit = (password: string) => {
     // todo : 비밀번호 확인 로직 추가!!
-    if (password === "1234") {
+    if (password === "111111") {
       console.log("Password correct. Proceed with payment:", cardAllocations);
       setIsProcessing(true);
       setShowPassword(false);
+      notifyParentAndClose();
     } else {
       alert("비밀번호가 틀렸습니다.");
       setIsProcessing(false);
