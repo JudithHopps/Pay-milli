@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
-import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
+import EmptyCart from "components/shoppingmall/shoppingBasket/EmptyCart";
 import HeaderComponent from "components/shoppingmall/Header";
 import ButtonComponent from "components/shoppingmall/Button";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,7 @@ export default function ShoppingBasket() {
       <HeaderComponent />
       <S.pageNav> {"Home > 장바구니"}</S.pageNav>
       {!cartList || cartList.length === 0 ? (
-        <DescriptionComponent description="장바구니가 비어 있습니다." />
+        <EmptyCart />
       ) : (
         <S.table>
           <S.caption>

@@ -58,7 +58,7 @@ export default function OrderSheet() {
       <S.pageNav>주문/결제</S.pageNav>
       <S.container>
         {!cartList || cartList.length === 0 ? (
-          <DescriptionComponent description="잘못된 요청입니다. 구매하고자 하는 상품을 담아주세요" />
+          <h2>{"잘못된 요청입니다. 구매하고자 하는 상품을 담아주세요"}</h2>
         ) : (
           <S.orderSummary>
             <S.orderTitle>주문 상품</S.orderTitle>

@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import HeaderComponent from "components/shoppingmall/Header";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export default function OrderComplete() {
-  const navigate = useNavigate(); // useNavigate 사용
+  useEffect(() => {
+    localStorage.removeItem("cartList");
+  }, []);
+  const navigate = useNavigate();
 
   return (
     <S.Container>
