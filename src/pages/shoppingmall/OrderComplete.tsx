@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import HeaderComponent from "components/shoppingmall/Header";
 import styled from "styled-components";
-// import { AiOutlineCheckCircle } from "react-icons/ai"; // 체크 아이콘 사용
 
 export default function OrderComplete() {
+  const navigate = useNavigate(); // useNavigate 사용
+
   return (
     <S.Container>
       <HeaderComponent />
@@ -12,7 +14,7 @@ export default function OrderComplete() {
           <h1>결제가 완료되었습니다!</h1>
           <p>주문이 정상적으로 처리되었습니다. 이용해주셔서 감사합니다.</p>
         </S.Description>
-        <S.Button onClick={() => (window.location.href = "/shopping")}>
+        <S.Button onClick={() => navigate("/mall/shopping")}>
           쇼핑 계속하기
         </S.Button>
       </S.Content>
