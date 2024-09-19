@@ -26,6 +26,12 @@ const CARD_DATA: Card[] = [
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9eJg6IqyETzLjkEjcYfEgwA6Zl_3NmsS_eQ&s",
     name: "서울",
   },
+
+  {
+    id: 4,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7Ywl2SlW7v5hO171wEsh3OoHABlxagdwpQ&s",
+    name: "11기",
+  },
 ];
 
 export default function Payment() {
@@ -186,7 +192,7 @@ export default function Payment() {
             <h4>결제 페이지</h4>
             <h5>최종 결제 금액: {formatCurrency(paymentAmount)}</h5>
           </div>
-          <div>
+          <CardDiv>
             {cards.map((card) => (
               <CardAllocation
                 key={card.id}
@@ -219,7 +225,7 @@ export default function Payment() {
                 </label>
               </CardAllocation>
             ))}
-          </div>
+          </CardDiv>
           <SubmitButton onClick={handlePayment} disabled={isProcessing}>
             {isProcessing ? "결제 처리 중..." : "결제하기"}
           </SubmitButton>
@@ -279,4 +285,11 @@ const SubmitButton = styled.button`
   font-size: 20px;
   position: fixed;
   bottom: 24px;
+`;
+
+const CardDiv = styled.div`
+  width: calc(100vw - 24px);
+  max-height: 350px;
+  overflow-y: auto;
+  margin-left: 12px;
 `;
