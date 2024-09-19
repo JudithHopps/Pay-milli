@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
-import DescriptionComponent from "components/shoppingmall/shoppingBasket/EmptyCart";
 import ButtonComponent from "components/shoppingmall/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -148,7 +147,7 @@ const S = {
     background-color: #f3f5f7;
     padding: 20px;
     border-radius: 8px;
-    padding-bottom: 100px; /* Adjust this if necessary */
+    padding-bottom: 100px;
   `,
   pageNav: styled.p`
     font-size: 15px;
@@ -236,9 +235,9 @@ const S = {
     bottom: 0;
     height: 80px;
     width: 100%;
-    background-color: #fff; /* Optional: background color for footer */
-    border-top: 1px solid #ddd; /* Optional: border for visual clarity */
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Optional: shadow for visual clarity */
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -250,7 +249,7 @@ const S = {
     color: #767678;
   `,
   buttonText: styled.p`
-    color: #fff; /* Button text color */
+    color: #fff;
     margin: 0;
   `,
 };

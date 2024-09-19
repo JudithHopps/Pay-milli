@@ -182,12 +182,11 @@ export default function Payment() {
         <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
       ) : (
         <Container>
-          <h1>결제 페이지</h1>
           <div>
-            <h2>최종 결제 금액: {formatCurrency(paymentAmount)}</h2>
+            <h4>결제 페이지</h4>
+            <h5>최종 결제 금액: {formatCurrency(paymentAmount)}</h5>
           </div>
           <div>
-            <h2>카드 선택:</h2>
             {cards.map((card) => (
               <CardAllocation
                 key={card.id}
@@ -279,5 +278,5 @@ const SubmitButton = styled.button`
   color: white;
   font-size: 20px;
   position: fixed;
-  bottom: 50px;
+  bottom: 24px;
 `;
