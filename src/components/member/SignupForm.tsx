@@ -5,7 +5,7 @@ import { SignupFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
-import PaymentPasswordModal from "../modal/PaymentPasswordModal"; // 모달 컴포넌트 추가
+import PaymentPasswordModal from "../modal/PaymentPasswordModal";
 
 enum GenderType {
   MALE = "MALE",
@@ -26,7 +26,7 @@ export default function SignupForm() {
 
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

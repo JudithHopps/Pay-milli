@@ -24,7 +24,6 @@ export default function MemberInfoForm() {
         setMemberInfo(data);
       } catch (err) {
         console.error(err);
-        // alert("멤버정보 가져오기 실패");
 
         setMemberInfo({
           memberId: "gilddong",
@@ -94,6 +93,6 @@ const Label = styled.span`
 
 const LoadingText = styled.p`
   text-align: center;
-  color: #6dcef5;
+  color: var(--main-color);
   font-size: 18px;
 `;

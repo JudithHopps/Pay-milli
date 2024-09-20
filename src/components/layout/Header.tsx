@@ -18,7 +18,7 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid var(--main-color);
 `;
 
 const ServiceLinks = styled.nav`
@@ -35,6 +35,6 @@ const ServiceNavLink = styled(Link)`
   font-weight: 700;
 
   &:hover {
-    color: #007bff;
+    color: var(--hover-color);
   }
 `;
