@@ -21,18 +21,21 @@ export default function MemberInfoForm() {
 
       try {
         const data = await getMemberInfo(accessToken);
-        setMemberInfo(data);
+        setMemberInfo({
+          ...data,
+          birthday: formatBirthday(data.birthday),
+          phone: formatPhoneNumber(data.phone),
+        });
       } catch (err) {
         console.error(err);
-        // alert("멤버정보 가져오기 실패");
 
         setMemberInfo({
           memberId: "gilddong",
           name: "홍길동",
           email: "gilddong@example.com",
-          birthday: "1990-01-01",
+          birthday: formatBirthday("19900101"),
           gender: "MALE",
-          phone: "010-1234-5678",
+          phone: formatPhoneNumber("01012345678"),
         });
       } finally {
         setLoading(false);
@@ -41,6 +44,14 @@ export default function MemberInfoForm() {
 
     fetchMemberInfo();
   }, [navigate]);
+
+  const formatBirthday = (birthday: string) => {
+    return `${birthday.slice(0, 4)}-${birthday.slice(4, 6)}-${birthday.slice(6)}`;
+  };
+
+  const formatPhoneNumber = (phone: string) => {
+    return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
+  };
 
   if (loading) {
     return <LoadingText>로딩 중...</LoadingText>;
@@ -94,6 +105,6 @@ const Label = styled.span`
 
 const LoadingText = styled.p`
   text-align: center;
-  color: #6dcef5;
+  color: var(--main-color);
   font-size: 18px;
 `;

@@ -38,6 +38,7 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
+  background-color: #fff;
   z-index: 1000;
 `;
 
@@ -46,7 +47,6 @@ const TopNavBar = styled.nav`
   justify-content: flex-end;
   align-items: center;
   padding: 10px 20px;
-  background-color: #fff;
 `;
 
 const MemberLinks = styled.div`

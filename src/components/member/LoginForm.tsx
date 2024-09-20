@@ -41,11 +41,12 @@ export default function LoginForm() {
     <FormContainer onSubmit={handleSubmit}>
       <InputField
         label="아이디"
-        name="userId"
+        name="memberId"
         type="text"
         value={formData.memberId}
         onChange={handleChange}
         required
+        maxLength={20}
       />
       <InputField
         label="비밀번호"
@@ -54,6 +55,7 @@ export default function LoginForm() {
         value={formData.password}
         onChange={handleChange}
         required
+        maxLength={20}
       />
       <SubmitButtonContainer>
         <SubmitButton label="로그인" />
