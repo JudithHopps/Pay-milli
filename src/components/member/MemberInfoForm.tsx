@@ -21,7 +21,11 @@ export default function MemberInfoForm() {
 
       try {
         const data = await getMemberInfo(accessToken);
-        setMemberInfo(data);
+        setMemberInfo({
+          ...data,
+          birthday: formatBirthday(data.birthday),
+          phone: formatPhoneNumber(data.phone),
+        });
       } catch (err) {
         console.error(err);
 
@@ -29,9 +33,9 @@ export default function MemberInfoForm() {
           memberId: "gilddong",
           name: "홍길동",
           email: "gilddong@example.com",
-          birthday: "1990-01-01",
+          birthday: formatBirthday("19900101"),
           gender: "MALE",
-          phone: "010-1234-5678",
+          phone: formatPhoneNumber("01012345678"),
         });
       } finally {
         setLoading(false);
@@ -40,6 +44,14 @@ export default function MemberInfoForm() {
 
     fetchMemberInfo();
   }, [navigate]);
+
+  const formatBirthday = (birthday: string) => {
+    return `${birthday.slice(0, 4)}-${birthday.slice(4, 6)}-${birthday.slice(6)}`;
+  };
+
+  const formatPhoneNumber = (phone: string) => {
+    return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
+  };
 
   if (loading) {
     return <LoadingText>로딩 중...</LoadingText>;
