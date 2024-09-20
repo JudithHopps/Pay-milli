@@ -94,6 +94,7 @@ export default function SignupForm() {
           onChange={handleChange}
           required
           placeholder="신권일"
+          maxLength={20}
         />
         <SelectField
           label="성별"
@@ -124,6 +125,7 @@ export default function SignupForm() {
           onChange={handleChange}
           required
           placeholder="gwonil"
+          maxLength={20}
         />
         <InputField
           label="비밀번호"
@@ -133,6 +135,7 @@ export default function SignupForm() {
           onChange={handleChange}
           required
           placeholder="password123"
+          maxLength={20}
         />
         <InputField
           label="비밀번호 확인"
@@ -142,6 +145,7 @@ export default function SignupForm() {
           onChange={handleConfirmPasswordChange}
           required
           placeholder="password123"
+          maxLength={20}
         />
         {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
         <InputField
@@ -152,6 +156,7 @@ export default function SignupForm() {
           onChange={handleChange}
           required
           placeholder="honggil@example.com"
+          maxLength={40}
         />
         <InputField
           label="전화번호"
@@ -172,6 +177,7 @@ export default function SignupForm() {
           required
           onClick={handlePaymentPasswordClick}
           placeholder="숫자 6자리"
+          maxLength={6}
           readOnly
         />
         <SubmitButtonContainer>
