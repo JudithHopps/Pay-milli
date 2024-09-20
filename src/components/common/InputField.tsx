@@ -6,9 +6,11 @@ interface InputFieldProps {
   type: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
   required?: boolean;
   placeholder?: string;
   maxLength?: number;
+  readOnly?: boolean;
 }
 
 export default function InputField({
@@ -17,9 +19,11 @@ export default function InputField({
   type,
   value,
   onChange,
+  onClick,
   required,
   placeholder,
   maxLength,
+  readOnly,
 }: InputFieldProps) {
   return (
     <InputWrapper>
@@ -29,9 +33,11 @@ export default function InputField({
         name={name}
         value={value}
         onChange={onChange}
+        onClick={onClick}
         required={required}
         placeholder={placeholder}
         maxLength={maxLength}
+        readOnly={readOnly}
       />
     </InputWrapper>
   );
