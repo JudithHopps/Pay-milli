@@ -8,6 +8,7 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   placeholder?: string;
+  maxLength?: number;
 }
 
 export default function InputField({
@@ -18,6 +19,7 @@ export default function InputField({
   onChange,
   required,
   placeholder,
+  maxLength,
 }: InputFieldProps) {
   return (
     <InputWrapper>
@@ -29,6 +31,7 @@ export default function InputField({
         onChange={onChange}
         required={required}
         placeholder={placeholder}
+        maxLength={maxLength}
       />
     </InputWrapper>
   );

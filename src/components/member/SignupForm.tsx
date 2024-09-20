@@ -7,8 +7,8 @@ import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
 
 enum GenderType {
-  FEMALE = "FEMALE",
   MALE = "MALE",
+  FEMALE = "FEMALE",
 }
 
 export default function SignupForm() {
@@ -18,7 +18,7 @@ export default function SignupForm() {
     email: "",
     password: "",
     birthday: "",
-    gender: GenderType.FEMALE,
+    gender: GenderType.MALE,
     phone: "",
     paymentPassword: "",
   });
@@ -47,13 +47,18 @@ export default function SignupForm() {
 
     if (formData.password !== confirmPassword) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
+      setFormData({
+        ...formData,
+        password: "",
+      });
+      setConfirmPassword("");
       return;
     }
 
     try {
       await signup({
         ...formData,
-        gender: formData.gender === GenderType.FEMALE ? "FEMALE" : "MALE",
+        gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });
       alert("회원가입 성공");
       setErrorMessage("");
@@ -79,8 +84,8 @@ export default function SignupForm() {
         name="gender"
         value={formData.gender}
         options={[
-          { value: GenderType.FEMALE, label: "여성" },
           { value: GenderType.MALE, label: "남성" },
+          { value: GenderType.FEMALE, label: "여성" },
         ]}
         onChange={handleChange}
         required
@@ -88,10 +93,12 @@ export default function SignupForm() {
       <InputField
         label="생년월일"
         name="birthday"
-        type="date"
+        type="text"
         value={formData.birthday}
         onChange={handleChange}
         required
+        placeholder="19980830"
+        maxLength={8}
       />
       <InputField
         label="아이디"
@@ -138,6 +145,7 @@ export default function SignupForm() {
         onChange={handleChange}
         required
         placeholder="01012345678"
+        maxLength={11}
       />
       <InputField
         label="결제 비밀번호"
