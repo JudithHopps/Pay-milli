@@ -283,7 +283,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   color: white;
   font-size: 20px;
-  position: fixed;
+  // position: fixed;
   bottom: 24px;
 `;
 
@@ -292,4 +292,5 @@ const CardDiv = styled.div`
   max-height: 350px;
   overflow-y: auto;
   margin-left: 12px;
+  margin-bottom: 50px;
 `;
