@@ -34,11 +34,14 @@ export default function OrderSheet() {
   };
 
   const totalCost = useMemo(() => {
-    return (
-      (cartList &&
-        cartList.reduce((acc, item) => acc + item.price * item.count, 0)) ||
-      0
-    );
+    const sum = cartList
+      ? cartList.reduce((acc, item) => acc + item.price * item.count, 0)
+      : 0;
+
+    // Add delivery charge if the total is less than the free shipping minimum amount
+    return sum < THE_FREE_SHIPPING_MINIMUM_AMOUNT
+      ? sum + THE_DELIVERY_CHARGE
+      : sum;
   }, [cartList]);
 
   window.notifyPaymilli = () => {
