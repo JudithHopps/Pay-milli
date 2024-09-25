@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import LoginForm from "../../components/member/LoginForm";
+import NavBar from "components/layout/NavBar";
 
 export default function Login() {
   return (
-    <LoginContainer>
-      <LoginTitle>로그인</LoginTitle>
-      <LoginForm />
-    </LoginContainer>
+    <>
+      <NavBar />
+      <LoginContainer>
+        <LoginTitle>로그인</LoginTitle>
+        <LoginForm />
+      </LoginContainer>
+    </>
   );
 }
 
 const LoginContainer = styled.div`
   max-width: 400px;
-  margin: 100px auto;
+  margin: 150px auto;
   padding: 20px;
   background-color: white;
   border-radius: 15px;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { signup } from "../../api/memberApi";
 import { SignupFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
@@ -23,6 +24,8 @@ export default function SignupForm() {
     phone: "",
     paymentPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -58,12 +61,15 @@ export default function SignupForm() {
     }
 
     try {
-      await signup({
+      console.log(formData);
+      const data = await signup({
         ...formData,
         gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });
+      console.log(data);
       alert("회원가입 성공");
       setErrorMessage("");
+      navigate("/login");
     } catch (err) {
       console.error(err);
       alert("회원가입 실패");

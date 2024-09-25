@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
+import NavBar from "components/layout/NavBar";
 
 export default function CardManagementPage() {
   const [cards, setCards] = useState([
@@ -22,27 +23,31 @@ export default function CardManagementPage() {
   };
 
   return (
-    <CardManagementPageContainer>
-      <LeftSection>
-        <CardList
-          cards={cards}
-          onCardClick={() => {}}
-          onAddCardClick={handleAddCardClick}
-        />
-      </LeftSection>
-      <RightSection>
-        {showAddCardForm && (
-          <AddCardForm
-            onSubmit={handleAddCardSubmit}
-            onCancel={() => setShowAddCardForm(false)}
+    <>
+      <NavBar />
+      <CardManagementPageContainer>
+        <LeftSection>
+          <CardList
+            cards={cards}
+            onCardClick={() => {}}
+            onAddCardClick={handleAddCardClick}
           />
-        )}
-      </RightSection>
-    </CardManagementPageContainer>
+        </LeftSection>
+        <RightSection>
+          {showAddCardForm && (
+            <AddCardForm
+              onSubmit={handleAddCardSubmit}
+              onCancel={() => setShowAddCardForm(false)}
+            />
+          )}
+        </RightSection>
+      </CardManagementPageContainer>
+    </>
   );
 }
 
 const CardManagementPageContainer = styled.div`
+  margin: 150px auto;
   display: flex;
   justify-content: space-between;
   padding: 20px;
