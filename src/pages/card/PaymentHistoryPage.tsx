@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
+import NavBar from "components/layout/NavBar";
 import { PaymentItemProps } from "../../types/card/cardTypes";
 import { PaymentHistory } from "../../api/cardApi";
 
@@ -30,6 +31,8 @@ export default function PaymentHistoryPage() {
   }
 
   return (
+    <>
+      <NavBar />
     <PaymentHistoryContainer>
       <PaymentSummary>총 승인 {paymentsdata.length}건</PaymentSummary>
       <hr />
@@ -49,11 +52,12 @@ export default function PaymentHistoryPage() {
       )}
       <hr />
     </PaymentHistoryContainer>
+    </>
   );
 }
 
 const PaymentHistoryContainer = styled.div`
-  margin: 20px auto;
+  margin: 20px;
   font-family: Arial, sans-serif;
   width: 700px;
 `;
