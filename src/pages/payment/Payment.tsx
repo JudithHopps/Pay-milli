@@ -26,6 +26,12 @@ const CARD_DATA: Card[] = [
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9eJg6IqyETzLjkEjcYfEgwA6Zl_3NmsS_eQ&s",
     name: "서울",
   },
+
+  {
+    id: 4,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7Ywl2SlW7v5hO171wEsh3OoHABlxagdwpQ&s",
+    name: "11기",
+  },
 ];
 
 export default function Payment() {
@@ -155,12 +161,25 @@ export default function Payment() {
     console.log("결제 처리 시작:", cardAllocations);
   };
 
+  const notifyParentAndClose = () => {
+    if (window.opener && typeof window.opener.notifyPaymilli === "function") {
+      window.opener.notifyPaymilli(); // 부모 창의 함수 호출
+    }
+    window.close();
+  };
+
+  const restorePayment = () => {
+    setIsProcessing(false);
+    setShowPassword(false);
+  };
+
   const handlePasswordSubmit = (password: string) => {
     // todo : 비밀번호 확인 로직 추가!!
-    if (password === "123456") {
+    if (password === "111111") {
       console.log("Password correct. Proceed with payment:", cardAllocations);
       setIsProcessing(true);
       setShowPassword(false);
+      notifyParentAndClose();
     } else {
       alert("비밀번호가 틀렸습니다.");
       setIsProcessing(false);
@@ -171,15 +190,18 @@ export default function Payment() {
   return (
     <>
       {showPassword ? (
-        <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
+        <PaymentPasswordInput
+          nickName="test"
+          onSubmit={handlePasswordSubmit}
+          restorePayment={restorePayment}
+        />
       ) : (
         <Container>
-          <h1>결제 페이지</h1>
           <div>
-            <h2>최종 결제 금액: {formatCurrency(paymentAmount)}</h2>
+            <h4>결제 페이지</h4>
+            <h5>최종 결제 금액: {formatCurrency(paymentAmount)}</h5>
           </div>
-          <div>
-            <h2>카드 선택:</h2>
+          <CardDiv>
             {cards.map((card) => (
               <CardAllocation
                 key={card.id}
@@ -212,7 +234,7 @@ export default function Payment() {
                 </label>
               </CardAllocation>
             ))}
-          </div>
+          </CardDiv>
           <SubmitButton onClick={handlePayment} disabled={isProcessing}>
             {isProcessing ? "결제 처리 중..." : "결제하기"}
           </SubmitButton>
@@ -270,7 +292,14 @@ const SubmitButton = styled.button`
   cursor: pointer;
   color: white;
   font-size: 20px;
-  // position: fixed;
-  bottom: 50px;
+  position: fixed;
+  bottom: 24px;
+`;
+
+const CardDiv = styled.div`
+  width: calc(100vw - 24px);
+  max-height: 350px;
+  overflow-y: auto;
+  margin-left: 12px;
   margin-bottom: 50px;
 `;

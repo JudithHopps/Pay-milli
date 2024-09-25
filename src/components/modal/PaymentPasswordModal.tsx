@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import BackIcon from "../common/BackIcon";
+import XmarkIcon from "../common/XmarkIcon";
 
-interface PaymentPasswordInputProps {
-  nickName: string;
+interface PaymentPasswordModalProps {
   onSubmit: (password: string) => void;
-  restorePayment: () => void;
+  onClose: () => void;
 }
 
-export default function PaymentPasswordInput({
-  nickName,
+export default function PaymentPasswordModal({
   onSubmit,
-  restorePayment,
-}: PaymentPasswordInputProps) {
-  const [password, setPassword] = useState<string>("");
-  const navigate = useNavigate();
+  onClose,
+}: PaymentPasswordModalProps) {
+  const [password, setPassword] = useState("");
 
   const handleNumberClick = (num: string) => {
     if (password.length < 6) {
@@ -34,19 +30,14 @@ export default function PaymentPasswordInput({
     setPassword("");
   };
 
-  const handleBackClick = () => {
-    restorePayment();
-  };
-
   return (
     <Wrapper>
       <Content>
-        <BackButton onClick={handleBackClick}>
-          <BackIcon />
-        </BackButton>
+        <CloseButton onClick={onClose}>
+          <XmarkIcon />
+        </CloseButton>
         <Description>
-          <p>{nickName}님의</p>
-          <p>비밀번호 입력</p>
+          <p>결제 비밀번호 설정</p>
           <PasswordDisplay>
             {Array(6)
               .fill("")
@@ -54,7 +45,6 @@ export default function PaymentPasswordInput({
                 <Dot key={index} filled={index < password.length} />
               ))}
           </PasswordDisplay>
-          <p>{"비밀번호 재설정 >"}</p>
         </Description>
 
         <PasswordInputContainer>
@@ -63,9 +53,9 @@ export default function PaymentPasswordInput({
               {num}
             </Button>
           ))}
-          <Button onClick={handleClearClick}>전체삭제</Button>
+          <Button onClick={handleClearClick}>전체 삭제</Button>
           <Button onClick={() => handleNumberClick("0")}>0</Button>
-          <Button onClick={handleDeleteClick}>del</Button>
+          <Button onClick={handleDeleteClick}>삭제</Button>
         </PasswordInputContainer>
       </Content>
     </Wrapper>
@@ -73,15 +63,20 @@ export default function PaymentPasswordInput({
 }
 
 const Wrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: column;
-  margin-top: 50px;
+  z-index: 1000;
 `;
 
 const Content = styled.div`
+  background-color: white;
   position: relative;
   max-width: 400px;
   padding: 20px;
@@ -90,15 +85,16 @@ const Content = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-const BackButton = styled.button`
+const CloseButton = styled.button`
   position: absolute;
   top: 15px;
-  left: 15px;
+  right: 15px;
   background: none;
   border: none;
 `;
 
-const Description = styled.div`
+const Description = styled.h2`
+  font-size: 20px;
   margin-bottom: 40px;
   text-align: center;
 `;
@@ -133,4 +129,5 @@ const Button = styled.button`
   font-size: 18px;
   margin: 0px;
   cursor: pointer;
+  }
 `;

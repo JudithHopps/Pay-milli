@@ -23,5 +23,5 @@ const SignupTitle = styled.h1`
   text-align: center;
   margin: 10px;
   font-size: 24px;
-  color: #6dcef5;
+  color: var(--main-color);
 `;

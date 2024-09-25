@@ -11,7 +11,7 @@ export default function SubmitButton({ label }: SubmitButtonProps) {
 const StyledButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #6dcef5;
+  background-color: var(--main-color);
   color: white;
   font-size: 15px;
   border: none;
@@ -20,6 +20,6 @@ const StyledButton = styled.button`
   transition: background-color 0.5s ease;
 
   &:hover {
-    background-color: #5bb3dc;
+    background-color: var(--hover-color);
   }
 `;

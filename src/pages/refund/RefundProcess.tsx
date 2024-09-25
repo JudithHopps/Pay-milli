@@ -15,7 +15,6 @@ const CARD_DATA: Card[] = [
   {
     cardId: "1",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7CSl1FTZlb3n9cjxIS-8JtTZY0mLK1-ucbA&s",
-
     cardName: "KB나라사랑카드",
     chargePrice: 20000,
   },
@@ -89,10 +88,19 @@ export default function RefundProcess() {
     setShowPassword(true);
   };
 
+  const restorePayment = () => {
+    setIsProcessing(false);
+    setShowPassword(false);
+  };
+
   return (
     <>
       {showPassword ? (
-        <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
+        <PaymentPasswordInput
+          nickName="test"
+          onSubmit={handlePasswordSubmit}
+          restorePayment={restorePayment}
+        />
       ) : (
         <Container>
           <h1>환불 페이지</h1>
