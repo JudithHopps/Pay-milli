@@ -33,25 +33,25 @@ export default function PaymentHistoryPage() {
   return (
     <>
       <NavBar />
-    <PaymentHistoryContainer>
-      <PaymentSummary>총 승인 {paymentsdata.length}건</PaymentSummary>
-      <hr />
-      {paymentsdata.length === 0 ? (
-        <NoData>조회된 거래내역이 없습니다.</NoData>
-      ) : (
-        paymentsdata.map((paymentsdata, index) => (
-          <PaymentItem
-            key={index}
-            storeName={paymentsdata.storeName}
-            detail={paymentsdata.detail}
-            price={paymentsdata.price}
-            date={paymentsdata.date}
-            paymentStatus={paymentsdata.paymentStatus}
-          />
-        ))
-      )}
-      <hr />
-    </PaymentHistoryContainer>
+      <PaymentHistoryContainer>
+        <PaymentSummary>총 승인 {paymentsdata.length}건</PaymentSummary>
+        <hr />
+        {paymentsdata.length === 0 ? (
+          <NoData>조회된 거래내역이 없습니다.</NoData>
+        ) : (
+          paymentsdata.map((paymentsdata, index) => (
+            <PaymentItem
+              key={index}
+              storeName={paymentsdata.storeName}
+              detail={paymentsdata.detail}
+              price={paymentsdata.price}
+              date={paymentsdata.date}
+              paymentStatus={paymentsdata.paymentStatus}
+            />
+          ))
+        )}
+        <hr />
+      </PaymentHistoryContainer>
     </>
   );
 }
