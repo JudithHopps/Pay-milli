@@ -1,51 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PaymentItem from "../../components/card/PaymentItem";
+import PaymentItem, {
+  PaymentItemProps,
+} from "../../components/card/PaymentItem";
+import axios from "axios";
 
 export default function PaymentHistoryPage() {
-  const Initialpaymentsdata = [
-    {
-      date: "2024-08-30",
-      name: "Apple",
-      amount: 1000000,
-      cards: [
-        { cardName: "국민 A ddd체크카드", amount: 400000 },
-        { cardName: "신한 B 신용카드", amount: 600000 },
-      ],
-    },
-    {
-      date: "2024-08-29",
-      name: "Apple",
-      amount: 1500000,
-      cards: [
-        { cardName: "국민 A 체크카드", amount: 400000 },
-        { cardName: "신한 B 신용카드", amount: 600000 },
-        { cardName: "하나 C 신용카드", amount: 500000 },
-      ],
-    },
-    {
-      date: "2024-08-29",
-      name: "롯데백화점",
-      amount: 1200000,
-      cards: [{ cardName: "우리 D 신용카드", amount: 1200000 }],
-    },
-  ];
+  const [paymentsdata, setPayments] = useState<PaymentItemProps[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get(
+        "http://j11a702.p.ssafy.io/api/v1/paymilli/payment",
+        {
+          headers: {
+            accessToken,
+          },
+        },
+      );
+      if (response.status === 200) {
+        setPayments(response.data.transactions);
+      }
+    } catch (error) {
+      console.error("Error fetching payment data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <PaymentHistoryContainer>
-      <h1>전체 결제 내역</h1>
-      <PaymentSummary>총 승인 {Initialpaymentsdata.length}건</PaymentSummary>
+      <PaymentSummary>총 승인 {paymentsdata.length}건</PaymentSummary>
       <hr />
-      {Initialpaymentsdata.length === 0 ? (
+      {paymentsdata.length === 0 ? (
         <NoData>조회된 거래내역이 없습니다.</NoData>
       ) : (
-        Initialpaymentsdata.map((Initialpaymentsdata, index) => (
+        paymentsdata.map((paymentsdata, index) => (
           <PaymentItem
             key={index}
-            date={Initialpaymentsdata.date}
-            name={Initialpaymentsdata.name}
-            amount={Initialpaymentsdata.amount}
-            cards={Initialpaymentsdata.cards}
+            storeName={paymentsdata.storeName}
+            detail={paymentsdata.detail}
+            price={paymentsdata.price}
+            date={paymentsdata.date}
+            paymentStatus={paymentsdata.paymentStatus}
           />
         ))
       )}
@@ -55,8 +63,9 @@ export default function PaymentHistoryPage() {
 }
 
 const PaymentHistoryContainer = styled.div`
-  margin: 20px;
+  margin: 20px auto;
   font-family: Arial, sans-serif;
+  width: 700px;
 `;
 
 const PaymentSummary = styled.div`
@@ -70,6 +79,7 @@ const NoData = styled.div`
   color: #666;
   padding: 50px 0;
   border: 1px solid #ddd;
+  background-color: #f0f4ff;
 `;
 
 const Hr = styled.hr`
