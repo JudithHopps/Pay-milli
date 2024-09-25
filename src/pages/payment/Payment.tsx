@@ -168,6 +168,11 @@ export default function Payment() {
     window.close();
   };
 
+  const restorePayment = () => {
+    setIsProcessing(false);
+    setShowPassword(false);
+  };
+
   const handlePasswordSubmit = (password: string) => {
     // todo : 비밀번호 확인 로직 추가!!
     if (password === "111111") {
@@ -185,7 +190,11 @@ export default function Payment() {
   return (
     <>
       {showPassword ? (
-        <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
+        <PaymentPasswordInput
+          nickName="test"
+          onSubmit={handlePasswordSubmit}
+          restorePayment={restorePayment}
+        />
       ) : (
         <Container>
           <div>
@@ -283,7 +292,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   color: white;
   font-size: 20px;
-  // position: fixed;
+  position: fixed;
   bottom: 24px;
 `;
 

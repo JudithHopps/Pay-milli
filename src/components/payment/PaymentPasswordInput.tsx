@@ -6,11 +6,13 @@ import BackIcon from "../common/BackIcon";
 interface PaymentPasswordInputProps {
   nickName: string;
   onSubmit: (password: string) => void;
+  restorePayment: () => void;
 }
 
 export default function PaymentPasswordInput({
   nickName,
   onSubmit,
+  restorePayment,
 }: PaymentPasswordInputProps) {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export default function PaymentPasswordInput({
   };
 
   const handleBackClick = () => {
-    navigate(-1);
+    restorePayment();
   };
 
   return (

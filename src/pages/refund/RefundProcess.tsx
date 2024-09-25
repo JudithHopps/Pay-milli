@@ -88,10 +88,19 @@ export default function RefundProcess() {
     setShowPassword(true);
   };
 
+  const restorePayment = () => {
+    setIsProcessing(false);
+    setShowPassword(false);
+  };
+
   return (
     <>
       {showPassword ? (
-        <PaymentPasswordInput nickName="test" onSubmit={handlePasswordSubmit} />
+        <PaymentPasswordInput
+          nickName="test"
+          onSubmit={handlePasswordSubmit}
+          restorePayment={restorePayment}
+        />
       ) : (
         <Container>
           <h1>환불 페이지</h1>
