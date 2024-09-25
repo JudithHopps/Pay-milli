@@ -1,13 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-export interface PaymentItemProps {
-  storeName: string;
-  detail: string;
-  price: number;
-  date: string;
-  paymentStatus: string;
-}
+import { PaymentItemProps } from "../../types/card/cardTypes";
 
 export default function PaymentItem({
   storeName,

@@ -4,12 +4,11 @@ import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
 
 export default function CardManagementPage() {
+  const [showAddCardForm, setShowAddCardForm] = useState(false);
+
   const [cards, setCards] = useState([
     { id: 1, name: "신한카드", imageUrl: "../../assets/young.png" },
-    { id: 2, name: "국민카드", imageUrl: "../../assets/young.png" },
   ]);
-
-  const [showAddCardForm, setShowAddCardForm] = useState(false);
 
   const handleAddCardClick = () => {
     setShowAddCardForm(true);

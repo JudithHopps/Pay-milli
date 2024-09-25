@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PaymentItem, {
-  PaymentItemProps,
-} from "../../components/card/PaymentItem";
-import axios from "axios";
+import PaymentItem from "../../components/card/PaymentItem";
+import { PaymentItemProps } from "../../types/card/cardTypes";
+import { PaymentHistory } from "../../api/cardApi";
 
 export default function PaymentHistoryPage() {
   const [paymentsdata, setPayments] = useState<PaymentItemProps[]>([]);
@@ -11,19 +10,10 @@ export default function PaymentHistoryPage() {
 
   const accessToken = localStorage.getItem("accessToken");
 
-  const fetchPayments = async () => {
+  const loadPayments = async () => {
     try {
-      const response = await axios.get(
-        "http://j11a702.p.ssafy.io/api/v1/paymilli/payment",
-        {
-          headers: {
-            accessToken,
-          },
-        },
-      );
-      if (response.status === 200) {
-        setPayments(response.data.transactions);
-      }
+      const transactions = await PaymentHistory(accessToken || "");
+      setPayments(transactions);
     } catch (error) {
       console.error("Error fetching payment data:", error);
     } finally {
@@ -32,7 +22,7 @@ export default function PaymentHistoryPage() {
   };
 
   useEffect(() => {
-    fetchPayments();
+    loadPayments();
   }, []);
 
   if (loading) {
