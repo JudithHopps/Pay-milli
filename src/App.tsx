@@ -12,6 +12,10 @@ import RefundProcess from "pages/refund/RefundProcess";
 import CardManagementPage from "pages/card/CardManagementPage";
 import PaymentHistoryPage from "pages/card/PaymentHistoryPage";
 import styled from "styled-components";
+import ProductList from "pages/shoppingmall/ProductList";
+import ShoppingBasket from "pages/shoppingmall/Basket";
+import OrderSheet from "pages/shoppingmall/OrderSheet";
+import OrderComplete from "pages/shoppingmall/OrderComplete";
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
             <Route path="/refund" element={<RefundProcess />} />
             <Route path="/cardmanagement" element={<CardManagementPage />} />
             <Route path="/paymenthistory" element={<PaymentHistoryPage />} />
+            <Route path="/mall/shopping" element={<ProductList />} />
+            <Route path="/mall/basket" element={<ShoppingBasket />} />
+            <Route path="/mall/order" element={<OrderSheet />} />
+            <Route path="/mall/order/complete" element={<OrderComplete />} />
           </Routes>
         </MainContent>
       </div>
