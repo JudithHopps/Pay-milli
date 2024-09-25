@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
+import NavBar from "components/layout/NavBar";
 
 export default function PaymentHistoryPage() {
   const Initialpaymentsdata = [
@@ -32,30 +33,33 @@ export default function PaymentHistoryPage() {
   ];
 
   return (
-    <PaymentHistoryContainer>
-      <h1>전체 결제 내역</h1>
-      <PaymentSummary>총 승인 {Initialpaymentsdata.length}건</PaymentSummary>
-      <hr />
-      {Initialpaymentsdata.length === 0 ? (
-        <NoData>조회된 거래내역이 없습니다.</NoData>
-      ) : (
-        Initialpaymentsdata.map((Initialpaymentsdata, index) => (
-          <PaymentItem
-            key={index}
-            date={Initialpaymentsdata.date}
-            name={Initialpaymentsdata.name}
-            amount={Initialpaymentsdata.amount}
-            cards={Initialpaymentsdata.cards}
-          />
-        ))
-      )}
-      <hr />
-    </PaymentHistoryContainer>
+    <>
+      <NavBar />
+      <PaymentHistoryContainer>
+        <h1>전체 결제 내역</h1>
+        <PaymentSummary>총 승인 {Initialpaymentsdata.length}건</PaymentSummary>
+        <hr />
+        {Initialpaymentsdata.length === 0 ? (
+          <NoData>조회된 거래내역이 없습니다.</NoData>
+        ) : (
+          Initialpaymentsdata.map((Initialpaymentsdata, index) => (
+            <PaymentItem
+              key={index}
+              date={Initialpaymentsdata.date}
+              name={Initialpaymentsdata.name}
+              amount={Initialpaymentsdata.amount}
+              cards={Initialpaymentsdata.cards}
+            />
+          ))
+        )}
+        <hr />
+      </PaymentHistoryContainer>
+    </>
   );
 }
 
 const PaymentHistoryContainer = styled.div`
-  margin: 20px;
+  margin: 150px auto;
   font-family: Arial, sans-serif;
 `;
 

@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import MemberInfoForm from "../../components/member/MemberInfoForm";
+import NavBar from "components/layout/NavBar";
 
 export default function MemberInfo() {
   return (
-    <MemberInfoContainer>
-      <MemberInfoTitle>사용자 정보</MemberInfoTitle>
-      <MemberInfoForm />
-    </MemberInfoContainer>
+    <>
+      <NavBar />
+      <MemberInfoContainer>
+        <MemberInfoTitle>사용자 정보</MemberInfoTitle>
+        <MemberInfoForm />
+      </MemberInfoContainer>
+    </>
   );
 }
 

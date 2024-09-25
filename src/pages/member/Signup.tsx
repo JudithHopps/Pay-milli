@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import SignupForm from "../../components/member/SignupForm";
+import NavBar from "components/layout/NavBar";
 
 export default function Signup() {
   return (
-    <SignupContainer>
-      <SignupTitle>회원가입</SignupTitle>
-      <SignupForm />
-    </SignupContainer>
+    <>
+      <NavBar />
+      <SignupContainer>
+        <SignupTitle>회원가입</SignupTitle>
+        <SignupForm />
+      </SignupContainer>
+    </>
   );
 }
 
 const SignupContainer = styled.div`
   max-width: 400px;
-  margin: 100px auto;
+  margin: 150px auto;
   padding: 20px;
   background-color: white;
   border-radius: 15px;

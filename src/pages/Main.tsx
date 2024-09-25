@@ -1,7 +1,10 @@
+import NavBar from "components/layout/NavBar";
+
 export default function Main() {
   return (
     <>
-      <div style={{ marginTop: "100px" }}>
+      <NavBar />
+      <div style={{ marginTop: "150px" }}>
         <p>main</p>
       </div>
     </>
