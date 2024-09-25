@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { login } from "../../api/memberApi";
+import { useNavigate } from "react-router-dom";
+import { login, getMemberInfo } from "../../api/memberApi";
 import { LoginFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
@@ -10,6 +11,8 @@ export default function LoginForm() {
     memberId: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,18 +27,19 @@ export default function LoginForm() {
     try {
       const data = await login(formData);
       localStorage.setItem("accessToken", data.accessToken);
-      alert("로그인 성공");
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        const memberInfo = await getMemberInfo(accessToken);
+        alert(`${memberInfo.name}님, 안녕하세요!`);
+        navigate("/");
+      } else {
+        alert("accessToken이 존재하지 않습니다. 다시 시도해주세요.");
+      }
     } catch (err) {
       console.error(err);
       alert("로그인 실패");
     }
   };
-
-  //임시 로그인 상태 확인 용
-  useEffect(() => {
-    const accessToken = "123456";
-    localStorage.setItem("accessToken", accessToken);
-  }, []);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
