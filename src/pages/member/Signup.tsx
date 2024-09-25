@@ -16,11 +16,12 @@ export default function Signup() {
 
 const SignupContainer = styled.div`
   max-width: 400px;
-  margin: 150px auto;
+  margin: 110px auto;
   padding: 20px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
 `;
 
 const SignupTitle = styled.h1`
