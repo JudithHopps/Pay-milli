@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
 // 결제내역 조회
-export const PaymentHistory = async (accessToken: string) => {
+export const getPaymentHistoryAPI = async (accessToken: string) => {
   const response = await axiosInstance.get("/payment", {
     headers: {
       accessToken,
@@ -11,7 +11,7 @@ export const PaymentHistory = async (accessToken: string) => {
 };
 
 // 카드목록 조회
-export const CardList = async (accessToken: string) => {
+export const getCardListAPI = async (accessToken: string) => {
   const response = await axiosInstance.get("/card", {
     headers: {
       accessToken,
