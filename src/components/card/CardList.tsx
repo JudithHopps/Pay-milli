@@ -20,14 +20,14 @@ export default function CardList({
 }: CardListProps) {
   return (
     <CardListContainer>
+      <AddCardItem onClick={onAddCardClick}>
+        <AddIcon>+</AddIcon>
+      </AddCardItem>
       {cards.map((card) => (
         <CardItem key={card.id} onClick={() => onCardClick(card.id)}>
           <CardImage src={card.imageUrl} alt={card.name} />
         </CardItem>
       ))}
-      <AddCardItem onClick={onAddCardClick}>
-        <AddIcon>+</AddIcon>
-      </AddCardItem>
     </CardListContainer>
   );
 }
