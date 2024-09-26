@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getMemberInfo } from "../../api/memberApi";
+import { getMemberInfoAPI } from "../../api/memberApi";
 import { MemberInfoData } from "../../types/memberTypes";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -20,7 +20,7 @@ export default function MemberInfoForm() {
       }
 
       try {
-        const data = await getMemberInfo(accessToken);
+        const data = await getMemberInfoAPI(accessToken);
         setMemberInfo({
           ...data,
           phone: formatPhoneNumber(data.phone),

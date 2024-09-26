@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { logout } from "../../api/memberApi";
+import { postLogoutAPI } from "../../api/memberApi";
 import Header from "./Header";
 
 export default function NavBar() {
@@ -22,7 +22,7 @@ export default function NavBar() {
     }
 
     try {
-      await logout(accessToken);
+      await postLogoutAPI(accessToken);
       setIsLogin(false);
       alert("로그아웃 되었습니다.");
       navigate("/login");

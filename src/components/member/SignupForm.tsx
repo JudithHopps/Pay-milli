@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../../api/memberApi";
+import { postSignupAPI } from "../../api/memberApi";
 import { SignupFormData } from "../../types/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
@@ -62,7 +62,7 @@ export default function SignupForm() {
 
     try {
       console.log(formData);
-      const data = await signup({
+      const data = await postSignupAPI({
         ...formData,
         gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });

@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteMember } from "../../api/memberApi";
+import { deleteMemberAPI } from "../../api/memberApi";
 import SubmitButton from "../common/SubmitButton";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function DeleteMemberForm() {
     }
 
     try {
-      await deleteMember(accessToken);
+      await deleteMemberAPI(accessToken);
       alert("회원 탈퇴가 완료되었습니다.");
       navigate("/");
     } catch (err) {
