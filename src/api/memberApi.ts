@@ -31,7 +31,7 @@ export const logout = async (accessToken: string) => {
       },
     },
   );
-  localStorage.clear();
+  localStorage.removeItem("accessToken");
   return response.data;
 };
 
