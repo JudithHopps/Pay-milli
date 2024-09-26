@@ -18,6 +18,10 @@ export default function Header() {
           내 카드 관리
           <LogoImg className="cardmanagement" />
         </ServiceNavLink>
+        <ServiceNavLink to="/payment/password">
+          결제 비밀번호 관리
+          <LogoImg className="cardmanagement" />
+        </ServiceNavLink>
       </ServiceLinks>
     </HeaderContainer>
   );

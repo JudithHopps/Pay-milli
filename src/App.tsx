@@ -5,6 +5,7 @@ import Main from "pages/Main";
 import Login from "pages/member/Login";
 import Signup from "pages/member/Signup";
 import MemberInfo from "pages/member/MemberInfo";
+import PaymentPassword from "pages/member/PaymentPassword";
 import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
 import CardManagementPage from "pages/card/CardManagementPage";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/memberinfo" element={<MemberInfo />} />
+        <Route path="/payment/password" element={<PaymentPassword />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/refund" element={<RefundProcess />} />
         <Route path="/cardmanagement" element={<CardManagementPage />} />

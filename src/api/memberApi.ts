@@ -70,6 +70,20 @@ export const deleteMember = async (accessToken: string) => {
   return response.data;
 };
 
+// 결제 비밀번호 확인 API (임시)
+export const verifyCurrentPassword = async (
+  accessToken: string,
+  paymentPassword: string,
+) => {
+  const response = await axiosInstance.get("/member/payment/password", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: { paymentPassword },
+  });
+  return response.data;
+};
+
 // 결제 비밀번호 변경 API
 export const updatePaymentPassword = async (
   accessToken: string,
