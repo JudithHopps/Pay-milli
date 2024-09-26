@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
 import NavBar from "components/layout/NavBar";
+import { AddCardFormData } from "../../types/card/cardTypes";
 
 export default function CardManagementPage() {
   const [showAddCardForm, setShowAddCardForm] = useState(false);
@@ -15,8 +16,12 @@ export default function CardManagementPage() {
     setShowAddCardForm(true);
   };
 
-  const handleAddCardSubmit = (name: string, imageUrl: string) => {
-    const newCard = { id: cards.length + 1, name, imageUrl };
+  const handleAddCardSubmit = (formData: AddCardFormData) => {
+    const newCard = {
+      id: cards.length + 1,
+      name: formData.cardHolderName, // AddCardFormData의 필드 사용
+      imageUrl: "/images/new_card.png", // 이미지 URL은 예시
+    };
     setCards([...cards, newCard]);
     setShowAddCardForm(false);
   };

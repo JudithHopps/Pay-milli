@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
 import NavBar from "components/layout/NavBar";
 import { PaymentItemProps } from "../../types/card/cardTypes";
-import { PaymentHistory } from "../../api/cardApi";
+import { getPaymentHistoryAPI } from "../../api/cardApi";
 
 export default function PaymentHistoryPage() {
   const [paymentsdata, setPayments] = useState<PaymentItemProps[]>([]);
@@ -13,7 +13,7 @@ export default function PaymentHistoryPage() {
 
   const loadPayments = async () => {
     try {
-      const transactions = await PaymentHistory(accessToken || "");
+      const transactions = await getPaymentHistoryAPI(accessToken || "");
       setPayments(transactions);
     } catch (error) {
       console.error("Error fetching payment data:", error);
