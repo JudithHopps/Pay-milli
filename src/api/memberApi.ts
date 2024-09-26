@@ -65,19 +65,8 @@ export const deleteMember = async (accessToken: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  return response.data;
-};
+  localStorage.removeItem("accessToken");
 
-// 회원 정보 변경 API
-export const updateMemberInfo = async (
-  accessToken: string,
-  formData: Partial<MemberInfoData>,
-) => {
-  const response = await axiosInstance.put("/member", formData, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
   return response.data;
 };
 

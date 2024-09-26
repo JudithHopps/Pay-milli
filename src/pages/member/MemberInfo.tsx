@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import MemberInfoForm from "../../components/member/MemberInfoForm";
+import DeleteMemberForm from "../../components/member/DeleteMemberForm";
 import NavBar from "components/layout/NavBar";
 
 export default function MemberInfo() {
@@ -9,6 +10,7 @@ export default function MemberInfo() {
       <MemberInfoContainer>
         <MemberInfoTitle>사용자 정보</MemberInfoTitle>
         <MemberInfoForm />
+        <DeleteMemberForm />
       </MemberInfoContainer>
     </>
   );
