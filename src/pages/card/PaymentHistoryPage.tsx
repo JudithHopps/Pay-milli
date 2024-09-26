@@ -57,9 +57,10 @@ export default function PaymentHistoryPage() {
 }
 
 const PaymentHistoryContainer = styled.div`
-  margin: 20px;
+  margin: 20px auto;
   font-family: Arial, sans-serif;
   width: 700px;
+  margin-top: 120px;
 `;
 
 const PaymentSummary = styled.div`
@@ -74,10 +75,4 @@ const NoData = styled.div`
   padding: 50px 0;
   border: 1px solid #ddd;
   background-color: #f0f4ff;
-`;
-
-const Hr = styled.hr`
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 20px 0;
 `;

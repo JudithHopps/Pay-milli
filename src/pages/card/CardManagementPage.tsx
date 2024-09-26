@@ -52,6 +52,7 @@ const CardManagementPageContainer = styled.div`
   padding: 20px;
   width: 800px;
   margin: 0 auto;
+  margin-top: 120px;
 `;
 
 const LeftSection = styled.div`
