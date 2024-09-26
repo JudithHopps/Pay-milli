@@ -1,43 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-
-interface CardPayment {
-  cardName: string;
-  amount: number;
-}
-
-interface PaymentItemProps {
-  date: string;
-  name: string;
-  amount: number;
-  cards: CardPayment[];
-}
+import { PaymentItemProps } from "../../types/card/cardTypes";
 
 export default function PaymentItem({
+  storeName,
+  detail,
+  price,
   date,
-  name,
-  amount,
-  cards,
+  paymentStatus,
 }: PaymentItemProps) {
   return (
     <PaymentItemContainer>
-      <PaymentItemHeader>
-        <PaymentDate>{date}</PaymentDate>
-      </PaymentItemHeader>
-      <PaymentItemContent>
-        <PaymentItemDetail>
-          <PaymentItemName>{name}</PaymentItemName>
-          <PaymentItemAmount>{amount.toLocaleString()}원</PaymentItemAmount>
-        </PaymentItemDetail>
-        <PaymentItemCards>
-          {cards.map((card, index) => (
-            <PaymentCardDetail key={index}>
-              <span>{card.cardName}</span>
-              <span>{card.amount.toLocaleString()}원</span>
-            </PaymentCardDetail>
-          ))}
-        </PaymentItemCards>
-      </PaymentItemContent>
+      <PaymentItemDetail>
+        <span>{date}</span>
+        <span>{storeName}</span>
+        <span>{detail}</span>
+        <span>{price.toLocaleString()}원</span>
+        <span>{paymentStatus === "payment" ? "결제 완료" : "환불 완료"}</span>
+      </PaymentItemDetail>
     </PaymentItemContainer>
   );
 }
@@ -51,43 +31,7 @@ const PaymentItemContainer = styled.div`
   flex-direction: column;
 `;
 
-const PaymentItemHeader = styled.div`
-  margin-bottom: 8px;
-`;
-
-const PaymentDate = styled.span`
-  font-size: 14px;
-  color: #333;
-`;
-
-const PaymentItemContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const PaymentItemDetail = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const PaymentItemName = styled.span`
-  font-weight: bold;
-  margin-right: 10px;
-  font-size: 16px;
-`;
-
-const PaymentItemAmount = styled.span`
-  font-size: 16px;
-`;
-
-const PaymentItemCards = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const PaymentCardDetail = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-top: 5px;
 `;

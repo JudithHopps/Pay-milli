@@ -5,12 +5,11 @@ import AddCardForm from "../../components/card/AddCardForm";
 import NavBar from "components/layout/NavBar";
 
 export default function CardManagementPage() {
-  const [cards, setCards] = useState([
-    { id: 1, name: "신한카드", imageUrl: "/images/card1.png" },
-    { id: 2, name: "국민카드", imageUrl: "/images/card2.png" },
-  ]);
-
   const [showAddCardForm, setShowAddCardForm] = useState(false);
+
+  const [cards, setCards] = useState([
+    { id: 1, name: "신한카드", imageUrl: "../../assets/young.png" },
+  ]);
 
   const handleAddCardClick = () => {
     setShowAddCardForm(true);
@@ -51,6 +50,9 @@ const CardManagementPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 120px;
 `;
 
 const LeftSection = styled.div`

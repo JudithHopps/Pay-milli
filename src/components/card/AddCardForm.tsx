@@ -16,7 +16,31 @@ export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
   const handleCardNumberChange = (index: number, value: string) => {
     const newCardNumber = [...cardNumber];
     newCardNumber[index] = value;
-    setCardNumber(newCardNumber);
+    if (/^[0-9]*$/.test(value)) {
+      newCardNumber[index] = value;
+      setCardNumber(newCardNumber);
+    }
+  };
+
+  const handleExpiryDateChange = (value: string) => {
+    const formattedValue = value.replace(/\D/g, "").slice(0, 4);
+    if (formattedValue.length >= 3) {
+      setExpiryDate(`${formattedValue.slice(0, 2)}/${formattedValue.slice(2)}`);
+    } else {
+      setExpiryDate(formattedValue);
+    }
+  };
+
+  const handleCvcChange = (value: string) => {
+    if (/^[0-9]*$/.test(value) && value.length <= 3) {
+      setCvc(value);
+    }
+  };
+
+  const handlePasswordChange = (value: string) => {
+    if (/^[0-9]*$/.test(value) && value.length <= 2) {
+      setPassword(value);
+    }
   };
 
   const handleSubmit = () => {
@@ -64,32 +88,38 @@ export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
 
       <InputContainer>
         <label>유효기간</label>
-        <InputField
-          type="text"
-          placeholder="MM/YY"
-          value={expiryDate}
-          onChange={(e) => setExpiryDate(e.target.value)}
-        />
+        <div>
+          <ExpiryInputField
+            type="text"
+            placeholder="MM/YY"
+            value={expiryDate}
+            onChange={(e) => handleExpiryDateChange(e.target.value)}
+          />
+        </div>
       </InputContainer>
 
       <InputContainer>
         <label>CVC</label>
-        <InputField
-          type="text"
-          maxLength={3}
-          value={cvc}
-          onChange={(e) => setCvc(e.target.value)}
-        />
+        <div>
+          <CvcInputField
+            type="password"
+            maxLength={3}
+            value={cvc}
+            onChange={(e) => handleCvcChange(e.target.value)}
+          />
+        </div>
       </InputContainer>
 
       <InputContainer>
-        <label>카드 비밀번호</label>
-        <InputField
-          type="password"
-          maxLength={4}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <label>카드 비밀번호 (앞2자리)</label>
+        <div>
+          <PasswordInputField
+            type="password"
+            maxLength={4}
+            value={password}
+            onChange={(e) => handlePasswordChange(e.target.value)}
+          />
+        </div>
       </InputContainer>
 
       <ButtonContainer>
@@ -140,6 +170,18 @@ const InputContainer = styled.div`
 const InputField = styled.input`
   width: 100%;
   padding: 5px;
+`;
+
+const ExpiryInputField = styled(InputField)`
+  width: 80px;
+`;
+
+const CvcInputField = styled(InputField)`
+  width: 60px;
+`;
+
+const PasswordInputField = styled(InputField)`
+  width: 50px;
 `;
 
 const ButtonContainer = styled.div`
