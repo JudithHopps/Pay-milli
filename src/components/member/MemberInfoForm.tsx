@@ -23,19 +23,17 @@ export default function MemberInfoForm() {
         const data = await getMemberInfo(accessToken);
         setMemberInfo({
           ...data,
-          birthday: formatBirthday(data.birthday),
           phone: formatPhoneNumber(data.phone),
         });
       } catch (err) {
         console.error(err);
 
         setMemberInfo({
-          memberId: "gilddong",
-          name: "홍길동",
-          email: "gilddong@example.com",
-          birthday: formatBirthday("19900101"),
-          gender: "MALE",
-          phone: formatPhoneNumber("01012345678"),
+          memberId: "",
+          name: "",
+          email: "",
+          gender: "",
+          phone: formatPhoneNumber(""),
         });
       } finally {
         setLoading(false);
@@ -44,10 +42,6 @@ export default function MemberInfoForm() {
 
     fetchMemberInfo();
   }, [navigate]);
-
-  const formatBirthday = (birthday: string) => {
-    return `${birthday.slice(0, 4)}-${birthday.slice(4, 6)}-${birthday.slice(6)}`;
-  };
 
   const formatPhoneNumber = (phone: string) => {
     return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
@@ -61,11 +55,8 @@ export default function MemberInfoForm() {
     memberInfo && (
       <FormContainer>
         <InfoItem>
-          <Label>이름</Label> {memberInfo.name} (
+          <Label>이름 (성별)</Label> {memberInfo.name} (
           {memberInfo.gender === "MALE" ? "남" : "여"})
-        </InfoItem>
-        <InfoItem>
-          <Label>생년월일</Label> {memberInfo.birthday}
         </InfoItem>
         <InfoItem>
           <Label>아이디</Label> {memberInfo.memberId}

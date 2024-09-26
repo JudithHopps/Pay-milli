@@ -18,7 +18,6 @@ export interface MemberInfoData {
   memberId: string;
   name: string;
   email: string;
-  birthday: string;
   gender: string;
   phone: string;
 }
