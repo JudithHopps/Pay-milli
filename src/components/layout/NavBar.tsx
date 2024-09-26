@@ -1,14 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { logout } from "../../api/memberApi";
 import Header from "./Header";
 
 export default function NavBar() {
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLogin(!!localStorage.getItem("accessToken"));
   }, []);
+
+  const handleLogout = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      alert("이미 로그아웃 상태입니다.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      await logout(accessToken);
+      setIsLogin(false);
+      alert("로그아웃 되었습니다.");
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      alert("로그아웃 실패");
+    }
+  };
 
   return (
     <Nav>
@@ -17,7 +39,15 @@ export default function NavBar() {
           {isLogin ? (
             <>
               <MemberNavLink to="/Memberinfo">내 정보</MemberNavLink>
-              <MemberNavLink to="/logout">로그아웃</MemberNavLink>
+              <MemberNavLink
+                to="/logout"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLogout();
+                }}
+              >
+                로그아웃
+              </MemberNavLink>
             </>
           ) : (
             <>

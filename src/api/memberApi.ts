@@ -31,6 +31,7 @@ export const logout = async (accessToken: string) => {
       },
     },
   );
+  localStorage.clear();
   return response.data;
 };
 
@@ -65,8 +66,7 @@ export const deleteMember = async (accessToken: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  localStorage.removeItem("accessToken");
-
+  localStorage.clear();
   return response.data;
 };
 
