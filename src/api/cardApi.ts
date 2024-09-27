@@ -5,7 +5,7 @@ import { AddCardFormData } from "../types/card/cardTypes";
 export const getPaymentHistoryAPI = async (accessToken: string) => {
   const response = await axiosInstance.get("/payment", {
     headers: {
-      accessToken,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return response.data.transactions;
@@ -17,7 +17,7 @@ export const getPaymentHistoryAPI = async (accessToken: string) => {
 export const getCardListAPI = async (accessToken: string) => {
   const response = await axiosInstance.get("/card", {
     headers: {
-      accessToken,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return response.data;
@@ -30,7 +30,7 @@ export const addCardAPI = async (
 ) => {
   const response = await axiosInstance.post("/card", formData, {
     headers: {
-      accessToken,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return response.data;
@@ -40,7 +40,7 @@ export const addCardAPI = async (
 export const deleteCardAPI = async (accessToken: string, cardId: string) => {
   const response = await axiosInstance.delete("/card", {
     headers: {
-      accessToken,
+      Authorization: `Bearer ${accessToken}`,
     },
     data: {
       cardId,

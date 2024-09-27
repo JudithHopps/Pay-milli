@@ -1,30 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
 import NavBar from "components/layout/NavBar";
-import { AddCardFormData } from "../../types/card/cardTypes";
+import { AddCardFormData, CardInfoData } from "../../types/card/cardTypes";
+import { getCardListAPI } from "../../api/cardApi";
 
 export default function CardManagementPage() {
   const [showAddCardForm, setShowAddCardForm] = useState(false);
+  const [cards, setCards] = useState<CardInfoData[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const [cards, setCards] = useState([
-    { id: 1, name: "신한카드", imageUrl: "../../assets/young.png" },
-  ]);
+  const getCardList = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        throw new Error("Access token is missing");
+      }
 
-  const handleAddCardClick = () => {
-    setShowAddCardForm(true);
+      const cardsData = await getCardListAPI(accessToken);
+
+      setCards(
+        cardsData.map((card: CardInfoData) => ({
+          id: card.cardId,
+          name: `${card.cardName} (끝자리 ${card.cardLastNum})`,
+          imageUrl: card.cardImage,
+        })),
+      );
+    } catch (error) {
+      console.error("Error fetching card list:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleAddCardSubmit = (formData: AddCardFormData) => {
-    const newCard = {
-      id: cards.length + 1,
-      name: formData.cardHolderName, // AddCardFormData의 필드 사용
-      imageUrl: "/images/new_card.png", // 이미지 URL은 예시
+    const newCard: CardInfoData = {
+      cardId: `${cards.length + 1}`,
+      cardName: formData.cardHolderName,
+      cardType: "CREDIT",
+      cardLastNum: formData.cardNumber.slice(-4),
+      cardImage: "/images/new_card.png",
     };
+
     setCards([...cards, newCard]);
     setShowAddCardForm(false);
   };
+
+  useEffect(() => {
+    getCardList();
+  }, []);
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <>
@@ -34,7 +63,7 @@ export default function CardManagementPage() {
           <CardList
             cards={cards}
             onCardClick={() => {}}
-            onAddCardClick={handleAddCardClick}
+            onAddCardClick={() => setShowAddCardForm(true)}
           />
         </LeftSection>
         <RightSection>

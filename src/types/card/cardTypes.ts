@@ -13,3 +13,11 @@ export interface AddCardFormData {
   cardHolderName: string;
   cardPassword: string;
 }
+
+export interface CardInfoData {
+  cardId: string;
+  cardName: string;
+  cardType: string;
+  cardLastNum: string;
+  cardImage: string;
+}

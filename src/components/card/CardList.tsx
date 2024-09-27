@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
-interface Card {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
+import { CardInfoData } from "types/card/cardTypes";
 
 interface CardListProps {
-  cards: Card[];
-  onCardClick: (cardId: number) => void;
+  cards: CardInfoData[];
+  onCardClick: (cardId: string) => void;
   onAddCardClick: () => void;
 }
 
@@ -24,8 +19,8 @@ export default function CardList({
         <AddIcon>+</AddIcon>
       </AddCardItem>
       {cards.map((card) => (
-        <CardItem key={card.id} onClick={() => onCardClick(card.id)}>
-          <CardImage src={card.imageUrl} alt={card.name} />
+        <CardItem key={card.cardId} onClick={() => onCardClick(card.cardId)}>
+          <CardImage src={card.cardImage} alt={card.cardName} />
         </CardItem>
       ))}
     </CardListContainer>
