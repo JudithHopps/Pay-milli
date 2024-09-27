@@ -16,7 +16,7 @@ export default function PaymentItem({
         <span>{storeName}</span>
         <span>{detail}</span>
         <span>{price.toLocaleString()}원</span>
-        <span>{paymentStatus === "payment" ? "결제 완료" : "환불 완료"}</span>
+        <span>{paymentStatus === "PAYMENT" ? "결제 완료" : "환불 완료"}</span>
       </PaymentItemDetail>
     </PaymentItemContainer>
   );

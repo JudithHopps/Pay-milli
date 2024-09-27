@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { AddCardFormData } from "../../types/card/cardTypes";
 
 interface AddCardFormProps {
-  onSubmit: (name: string, imageUrl: string) => void;
+  onSubmit: (formData: AddCardFormData) => void;
   onCancel: () => void;
 }
 
 export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
-  const [cardType, setCardType] = useState("체크카드");
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
   const [expiryDate, setExpiryDate] = useState("");
   const [cvc, setCvc] = useState("");
   const [password, setPassword] = useState("");
+  const [cardHolderName, setCardHolderName] = useState("");
 
   const handleCardNumberChange = (index: number, value: string) => {
     const newCardNumber = [...cardNumber];
-    newCardNumber[index] = value;
     if (/^[0-9]*$/.test(value)) {
       newCardNumber[index] = value;
       setCardNumber(newCardNumber);
@@ -43,34 +43,24 @@ export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
     }
   };
 
+  const handleCardHolderNameChange = (value: string) => {
+    setCardHolderName(value);
+  };
+
   const handleSubmit = () => {
-    onSubmit("새로운 카드", "/images/new_card.png");
+    const formData: AddCardFormData = {
+      cardNumber: cardNumber.join(""),
+      cvc,
+      expirationDate: expiryDate.replace("/", ""),
+      cardHolderName,
+      cardPassword: password,
+    };
+    onSubmit(formData);
   };
 
   return (
     <FormContainer>
       <Title>카드 정보를 입력해 주세요.</Title>
-      <CardTypeContainer>
-        <label>
-          <input
-            type="radio"
-            value="체크카드"
-            checked={cardType === "체크카드"}
-            onChange={(e) => setCardType(e.target.value)}
-          />
-          체크카드
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="신용카드"
-            checked={cardType === "신용카드"}
-            onChange={(e) => setCardType(e.target.value)}
-          />
-          신용카드
-        </label>
-      </CardTypeContainer>
-
       <CardNumberContainer>
         <label>카드 번호</label>
         <div>
@@ -122,6 +112,17 @@ export default function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
         </div>
       </InputContainer>
 
+      <InputContainer>
+        <label>카드 소유자 이름</label>
+        <div>
+          <NameInputField
+            type="text"
+            value={cardHolderName}
+            onChange={(e) => handleCardHolderNameChange(e.target.value)}
+          />
+        </div>
+      </InputContainer>
+
       <ButtonContainer>
         <Button onClick={handleSubmit}>등록</Button>
         <CancelButton onClick={onCancel}>취소</CancelButton>
@@ -142,11 +143,6 @@ const FormContainer = styled.div`
 const Title = styled.h2`
   font-size: 18px;
   margin-bottom: 15px;
-`;
-
-const CardTypeContainer = styled.div`
-  display: flex;
-  gap: 10px;
 `;
 
 const CardNumberContainer = styled.div`
@@ -182,6 +178,10 @@ const CvcInputField = styled(InputField)`
 
 const PasswordInputField = styled(InputField)`
   width: 50px;
+`;
+
+const NameInputField = styled(InputField)`
+  width: 80px;
 `;
 
 const ButtonContainer = styled.div`
