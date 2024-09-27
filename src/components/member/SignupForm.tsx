@@ -195,6 +195,7 @@ export default function SignupForm() {
         <PaymentPasswordModal
           onSubmit={handleSetPaymentPassword}
           onClose={() => setIsModalOpen(false)}
+          title="결제 비밀번호 설정"
         />
       )}
     </>
