@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import XmarkIcon from "../common/XmarkIcon";
 
@@ -14,6 +14,10 @@ export default function PaymentPasswordModal({
   title,
 }: PaymentPasswordModalProps) {
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    setPassword("");
+  }, [title]);
 
   const handleNumberClick = (num: string) => {
     if (password.length < 6) {

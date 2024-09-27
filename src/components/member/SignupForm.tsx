@@ -66,7 +66,6 @@ export default function SignupForm() {
         ...formData,
         gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });
-      console.log(data);
       alert("회원가입 성공");
       setErrorMessage("");
       navigate("/login");
