@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { postSignupAPI } from "../../api/memberApi";
+import Cookies from "js-cookie";
+import { postSignupAPI, postLoginAPI } from "../../api/memberApi";
 import { SignupFormData } from "../../types/member/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
@@ -61,14 +62,19 @@ export default function SignupForm() {
     }
 
     try {
-      console.log(formData);
       const data = await postSignupAPI({
         ...formData,
         gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });
       alert("회원가입 성공");
+      const loginData = await postLoginAPI({
+        memberId: formData.memberId,
+        password: formData.password,
+      });
+      Cookies.set("accessToken", loginData.accessToken, { expires: 1 });
       setErrorMessage("");
-      navigate("/login");
+      alert(`${formData.name}님, 환영합니다!`);
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert("회원가입 실패");
