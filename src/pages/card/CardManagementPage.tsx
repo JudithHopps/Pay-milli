@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
+import CardDetail from "../../components/card/CardDetail";
 import NavBar from "components/layout/NavBar";
 import { AddCardFormData, CardInfoData } from "../../types/card/cardTypes";
 import { getCardListAPI } from "../../api/cardApi";
@@ -9,6 +10,7 @@ import { getCardListAPI } from "../../api/cardApi";
 export default function CardManagementPage() {
   const [showAddCardForm, setShowAddCardForm] = useState(false);
   const [cards, setCards] = useState<CardInfoData[]>([]);
+  const [selectedCard, setSelectedCard] = useState<CardInfoData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const getCardList = async () => {
@@ -22,15 +24,26 @@ export default function CardManagementPage() {
 
       setCards(
         cardsData.map((card: CardInfoData) => ({
-          id: card.cardId,
-          name: `${card.cardName} (끝자리 ${card.cardLastNum})`,
-          imageUrl: card.cardImage,
+          cardId: card.cardId,
+          cardName: `${card.cardName} (끝자리 ${card.cardLastNum})`,
+          cardType: card.cardType,
+          cardLastNum: card.cardLastNum,
+          cardImage: card.cardImage,
         })),
       );
     } catch (error) {
       console.error("Error fetching card list:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // 카드 선택 핸들러 수정
+  const handleCardClick = (cardId: string) => {
+    const clickedCard = cards.find((card) => card.cardId === cardId);
+    if (clickedCard) {
+      setSelectedCard(clickedCard);
+      setShowAddCardForm(false); // 카드를 클릭하면 AddCardForm을 닫고 CardDetail을 보여줌
     }
   };
 
@@ -44,6 +57,7 @@ export default function CardManagementPage() {
     };
 
     setCards([...cards, newCard]);
+    setSelectedCard(newCard);
     setShowAddCardForm(false);
   };
 
@@ -62,7 +76,7 @@ export default function CardManagementPage() {
         <LeftSection>
           <CardList
             cards={cards}
-            onCardClick={() => {}}
+            onCardClick={handleCardClick}
             onAddCardClick={() => setShowAddCardForm(true)}
           />
         </LeftSection>
@@ -73,6 +87,7 @@ export default function CardManagementPage() {
               onCancel={() => setShowAddCardForm(false)}
             />
           )}
+          {!showAddCardForm && <CardDetail card={selectedCard} />}
         </RightSection>
       </CardManagementPageContainer>
     </>
