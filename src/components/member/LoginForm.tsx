@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { postLoginAPI, getMemberInfoAPI } from "../../api/memberApi";
-import { LoginFormData } from "../../types/memberTypes";
+import { LoginFormData } from "../../types/member/memberTypes";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
 

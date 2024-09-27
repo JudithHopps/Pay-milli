@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { postSignupAPI } from "../../api/memberApi";
-import { SignupFormData } from "../../types/memberTypes";
+import { SignupFormData } from "../../types/member/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";

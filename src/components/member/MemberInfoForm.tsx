@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { getMemberInfoAPI } from "../../api/memberApi";
-import { MemberInfoData } from "../../types/memberTypes";
+import { MemberInfoData } from "../../types/member/memberTypes";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 

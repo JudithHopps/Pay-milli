@@ -1,10 +1,6 @@
 import Cookies from "js-cookie";
 import axiosInstance from "./axiosInstance";
-import {
-  SignupFormData,
-  LoginFormData,
-  MemberInfoData,
-} from "../types/memberTypes";
+import { SignupFormData, LoginFormData } from "../types/member/memberTypes";
 
 // 회원가입 API
 export const postSignupAPI = async (formData: SignupFormData) => {
