@@ -16,7 +16,6 @@ export const deleteMemberAPI = async (accessToken: string) => {
     },
   });
   Cookies.remove("accessToken");
-  localStorage.clear();
   return response.data;
 };
 
