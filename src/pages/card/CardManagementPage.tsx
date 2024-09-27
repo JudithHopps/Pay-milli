@@ -5,7 +5,7 @@ import AddCardForm from "../../components/card/AddCardForm";
 import CardDetail from "../../components/card/CardDetail";
 import NavBar from "components/layout/NavBar";
 import { AddCardFormData, CardInfoData } from "../../types/card/cardTypes";
-import { getCardListAPI } from "../../api/cardApi";
+import { getCardListAPI, addCardAPI } from "../../api/cardApi";
 
 export default function CardManagementPage() {
   const [showAddCardForm, setShowAddCardForm] = useState(false);
@@ -38,27 +38,32 @@ export default function CardManagementPage() {
     }
   };
 
-  // 카드 선택 핸들러 수정
   const handleCardClick = (cardId: string) => {
     const clickedCard = cards.find((card) => card.cardId === cardId);
     if (clickedCard) {
       setSelectedCard(clickedCard);
-      setShowAddCardForm(false); // 카드를 클릭하면 AddCardForm을 닫고 CardDetail을 보여줌
+      setShowAddCardForm(false);
     }
   };
 
-  const handleAddCardSubmit = (formData: AddCardFormData) => {
-    const newCard: CardInfoData = {
-      cardId: `${cards.length + 1}`,
-      cardName: formData.cardHolderName,
-      cardType: "CREDIT",
-      cardLastNum: formData.cardNumber.slice(-4),
-      cardImage: "/images/new_card.png",
-    };
+  const handleAddCardSubmit = async (formData: AddCardFormData) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        throw new Error("Access token is missing");
+      }
 
-    setCards([...cards, newCard]);
-    setSelectedCard(newCard);
-    setShowAddCardForm(false);
+      const newCardFromServer: CardInfoData = await addCardAPI(
+        accessToken,
+        formData,
+      );
+
+      setCards([...cards, newCardFromServer]);
+      setSelectedCard(newCardFromServer);
+      setShowAddCardForm(false);
+    } catch (error) {
+      console.error("Error adding new card:", error);
+    }
   };
 
   useEffect(() => {
