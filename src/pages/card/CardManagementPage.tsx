@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Cookies from "js-cookie";
 import CardList from "../../components/card/CardList";
 import AddCardForm from "../../components/card/AddCardForm";
 import CardDetail from "../../components/card/CardDetail";
@@ -15,7 +16,7 @@ export default function CardManagementPage() {
 
   const getCardList = async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = Cookies.get("accessToken");
       if (!accessToken) {
         throw new Error("Access token is missing");
       }
@@ -48,7 +49,7 @@ export default function CardManagementPage() {
 
   const handleAddCardSubmit = async (formData: AddCardFormData) => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = Cookies.get("accessToken");
       if (!accessToken) {
         throw new Error("Access token is missing");
       }
