@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "js-cookie";
 import { deleteMemberAPI } from "../../api/memberApi";
 import SubmitButton from "../common/SubmitButton";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +9,7 @@ export default function DeleteMemberForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const accessToken = localStorage.getItem("accessToken");
-
+    const accessToken = Cookies.get("accessToken");
     if (!accessToken) {
       alert("로그인이 필요합니다.");
       navigate("/login");

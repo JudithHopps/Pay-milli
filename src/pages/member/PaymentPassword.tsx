@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import NavBar from "components/layout/NavBar";
 import PaymentPasswordModal from "../../components/modal/PaymentPasswordModal";
@@ -20,7 +21,7 @@ export default function PaymentPassword() {
     if (step === 1) {
       // 현재 비밀번호 확인 단계
       try {
-        const accessToken = localStorage.getItem("accessToken");
+        const accessToken = Cookies.get("accessToken");
         if (!accessToken) {
           alert("로그인이 필요합니다.");
           navigate("/login");
@@ -44,7 +45,7 @@ export default function PaymentPassword() {
       // 비밀번호 확인 단계
       if (password === newPassword) {
         try {
-          const accessToken = localStorage.getItem("accessToken");
+          const accessToken = Cookies.get("accessToken");
           if (!accessToken) {
             alert("로그인이 필요합니다.");
             navigate("/login");

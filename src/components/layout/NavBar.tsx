@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { postLogoutAPI } from "../../api/memberApi";
@@ -9,11 +10,11 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLogin(!!localStorage.getItem("accessToken"));
+    setIsLogin(!!Cookies.get("accessToken"));
   }, []);
 
   const handleLogout = async () => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = Cookies.get("accessToken");
 
     if (!accessToken) {
       alert("이미 로그아웃 상태입니다.");

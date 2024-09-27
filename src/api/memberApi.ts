@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import axiosInstance from "./axiosInstance";
 import {
   SignupFormData,
@@ -18,6 +19,7 @@ export const deleteMemberAPI = async (accessToken: string) => {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+  Cookies.remove("accessToken");
   localStorage.clear();
   return response.data;
 };
@@ -42,7 +44,7 @@ export const postLogoutAPI = async (accessToken: string) => {
       },
     },
   );
-  localStorage.removeItem("accessToken");
+  Cookies.remove("accessToken");
   return response.data;
 };
 

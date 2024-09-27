@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import PaymentItem from "../../components/card/PaymentItem";
 import NavBar from "components/layout/NavBar";
@@ -9,7 +10,7 @@ export default function PaymentHistoryPage() {
   const [paymentsdata, setPayments] = useState<PaymentItemProps[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = Cookies.get("accessToken");
 
   const loadPayments = async () => {
     try {

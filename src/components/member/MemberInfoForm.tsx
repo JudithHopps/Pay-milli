@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { getMemberInfoAPI } from "../../api/memberApi";
 import { MemberInfoData } from "../../types/memberTypes";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ export default function MemberInfoForm() {
 
   useEffect(() => {
     const fetchMemberInfo = async () => {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = Cookies.get("accessToken");
 
       if (!accessToken) {
         alert("로그인이 필요합니다.");
