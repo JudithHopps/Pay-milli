@@ -2,12 +2,16 @@ import styled from "styled-components";
 
 interface SubmitButtonProps {
   label: string;
+  onClick?: () => void;
 }
 
-export default function SubmitButton({ label }: SubmitButtonProps) {
-  return <StyledButton type="submit">{label}</StyledButton>;
+export default function SubmitButton({ label, onClick }: SubmitButtonProps) {
+  return (
+    <StyledButton type="submit" onClick={onClick}>
+      {label}
+    </StyledButton>
+  );
 }
-
 const StyledButton = styled.button`
   width: 100%;
   padding: 10px;

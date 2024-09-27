@@ -2,9 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NotFound from "pages/NotFound";
 import Main from "pages/Main";
-import Signup from "pages/member/Signup";
 import Login from "pages/member/Login";
-import Logout from "pages/member/Logout";
+import Signup from "pages/member/Signup";
 import MemberInfo from "pages/member/MemberInfo";
 import Payment from "pages/payment/Payment";
 import RefundProcess from "pages/refund/RefundProcess";
@@ -23,7 +22,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/memberinfo" element={<MemberInfo />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/refund" element={<RefundProcess />} />

@@ -1,14 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { postLogoutAPI } from "../../api/memberApi";
 import Header from "./Header";
 
 export default function NavBar() {
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLogin(!!localStorage.getItem("accessToken"));
+    setIsLogin(!!Cookies.get("accessToken"));
   }, []);
+
+  const handleLogout = async () => {
+    const accessToken = Cookies.get("accessToken");
+    if (!accessToken) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
+    }
+
+    if (!window.confirm("로그아웃을 진행하시겠습니까?")) {
+      return;
+    }
+
+    try {
+      await postLogoutAPI(accessToken);
+      setIsLogin(false);
+      alert("로그아웃 성공");
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      alert("로그아웃 실패");
+    }
+  };
 
   return (
     <Nav>
@@ -17,7 +43,15 @@ export default function NavBar() {
           {isLogin ? (
             <>
               <MemberNavLink to="/Memberinfo">내 정보</MemberNavLink>
-              <MemberNavLink to="/logout">로그아웃</MemberNavLink>
+              <MemberNavLink
+                to="/logout"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLogout();
+                }}
+              >
+                로그아웃
+              </MemberNavLink>
             </>
           ) : (
             <>

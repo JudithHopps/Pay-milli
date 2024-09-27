@@ -1,18 +1,26 @@
+import Cookies from "js-cookie";
 import axiosInstance from "./axiosInstance";
-import {
-  SignupFormData,
-  LoginFormData,
-  MemberInfoData,
-} from "../types/memberTypes";
+import { SignupFormData, LoginFormData } from "../types/member/memberTypes";
 
 // 회원가입 API
-export const signup = async (formData: SignupFormData) => {
+export const postSignupAPI = async (formData: SignupFormData) => {
   const response = await axiosInstance.post("/member/join", formData);
   return response.data;
 };
 
+// 회원 탈퇴 API
+export const deleteMemberAPI = async (accessToken: string) => {
+  const response = await axiosInstance.delete("/member", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  Cookies.remove("accessToken");
+  return response.data;
+};
+
 // 로그인 API
-export const login = async (formData: LoginFormData) => {
+export const postLoginAPI = async (formData: LoginFormData) => {
   const response = await axiosInstance.post<{ accessToken: string }>(
     "/member/login",
     formData,
@@ -21,7 +29,7 @@ export const login = async (formData: LoginFormData) => {
 };
 
 // 로그아웃 API
-export const logout = async (accessToken: string) => {
+export const postLogoutAPI = async (accessToken: string) => {
   const response = await axiosInstance.post(
     "/member/logout",
     {},
@@ -31,11 +39,12 @@ export const logout = async (accessToken: string) => {
       },
     },
   );
+  Cookies.remove("accessToken");
   return response.data;
 };
 
 // 회원 정보 조회 API
-export const getMemberInfo = async (accessToken: string) => {
+export const getMemberInfoAPI = async (accessToken: string) => {
   const response = await axiosInstance.get("/member/info", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -45,7 +54,7 @@ export const getMemberInfo = async (accessToken: string) => {
 };
 
 // 토큰 재발급 API
-export const refreshToken = async (accessToken: string) => {
+export const postRefreshTokenAPI = async (accessToken: string) => {
   const response = await axiosInstance.post(
     "/member/refresh",
     {},
@@ -58,31 +67,25 @@ export const refreshToken = async (accessToken: string) => {
   return response.data;
 };
 
-// 회원 탈퇴 API
-export const deleteMember = async (accessToken: string) => {
-  const response = await axiosInstance.delete("/member", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  return response.data;
-};
-
-// 회원 정보 변경 API
-export const updateMemberInfo = async (
+// 결제 비밀번호 인증 API (임시)
+export const PostVerifyPayPassword = async (
   accessToken: string,
-  formData: Partial<MemberInfoData>,
+  paymentPassword: string,
 ) => {
-  const response = await axiosInstance.put("/member", formData, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  const response = await axiosInstance.post(
+    "/member/payment/password",
+    { paymentPassword },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  });
+  );
   return response.data;
 };
 
-// 결제 비밀번호 변경 API
-export const updatePaymentPassword = async (
+// 결제 비밀번호 변경 API (임시)
+export const PutUpdatePayPassword = async (
   accessToken: string,
   paymentPassword: string,
 ) => {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { login, getMemberInfo } from "../../api/memberApi";
-import { LoginFormData } from "../../types/memberTypes";
+import Cookies from "js-cookie";
+import { postLoginAPI, getMemberInfoAPI } from "../../api/memberApi";
+import { LoginFormData } from "../../types/member/memberTypes";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
 
@@ -25,11 +26,11 @@ export default function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(formData);
-      localStorage.setItem("accessToken", data.accessToken);
-      const accessToken = localStorage.getItem("accessToken");
+      const data = await postLoginAPI(formData);
+      Cookies.set("accessToken", data.accessToken, { expires: 1 });
+      const accessToken = Cookies.get("accessToken");
       if (accessToken) {
-        const memberInfo = await getMemberInfo(accessToken);
+        const memberInfo = await getMemberInfoAPI(accessToken);
         alert(`${memberInfo.name}님, 안녕하세요!`);
         navigate("/");
       } else {

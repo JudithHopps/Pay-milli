@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import ButtonComponent from "components/shoppingmall/Button";
 import { useNavigate } from "react-router-dom";

@@ -5,11 +5,13 @@ import XmarkIcon from "../common/XmarkIcon";
 interface PaymentPasswordModalProps {
   onSubmit: (password: string) => void;
   onClose: () => void;
+  title: string;
 }
 
 export default function PaymentPasswordModal({
   onSubmit,
   onClose,
+  title,
 }: PaymentPasswordModalProps) {
   const [password, setPassword] = useState("");
 
@@ -37,7 +39,7 @@ export default function PaymentPasswordModal({
           <XmarkIcon />
         </CloseButton>
         <Description>
-          <p>결제 비밀번호 설정</p>
+          <p>{title}</p>
           <PasswordDisplay>
             {Array(6)
               .fill("")

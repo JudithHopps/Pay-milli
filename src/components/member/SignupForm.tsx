@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../../api/memberApi";
-import { SignupFormData } from "../../types/memberTypes";
+import { postSignupAPI } from "../../api/memberApi";
+import { SignupFormData } from "../../types/member/memberTypes";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import SubmitButton from "../common/SubmitButton";
@@ -62,7 +62,7 @@ export default function SignupForm() {
 
     try {
       console.log(formData);
-      const data = await signup({
+      const data = await postSignupAPI({
         ...formData,
         gender: formData.gender === GenderType.MALE ? "MALE" : "FEMALE",
       });
@@ -195,6 +195,7 @@ export default function SignupForm() {
         <PaymentPasswordModal
           onSubmit={handleSetPaymentPassword}
           onClose={() => setIsModalOpen(false)}
+          title="결제 비밀번호 설정"
         />
       )}
     </>

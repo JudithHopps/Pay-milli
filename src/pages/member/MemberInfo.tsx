@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import MemberInfoForm from "../../components/member/MemberInfoForm";
+import DeleteMemberForm from "../../components/member/DeleteMemberForm";
+import PaymentPasswordForm from "../../components/member/PaymentPasswordForm";
 import NavBar from "components/layout/NavBar";
 
 export default function MemberInfo() {
@@ -9,6 +11,9 @@ export default function MemberInfo() {
       <MemberInfoContainer>
         <MemberInfoTitle>사용자 정보</MemberInfoTitle>
         <MemberInfoForm />
+        <PaymentPasswordForm />
+        <Spacer />
+        <DeleteMemberForm />
       </MemberInfoContainer>
     </>
   );
@@ -28,4 +33,8 @@ const MemberInfoTitle = styled.h1`
   margin: 10px;
   font-size: 24px;
   color: var(--main-color);
+`;
+
+const Spacer = styled.div`
+  height: 8px;
 `;
