@@ -74,7 +74,7 @@ export default function SignupForm() {
       Cookies.set("accessToken", loginData.accessToken, { expires: 1 });
       setErrorMessage("");
       alert(`${formData.name}님, 환영합니다!`);
-      navigate("/");
+      navigate("/memberinfo");
     } catch (err) {
       console.error(err);
       alert("회원가입 실패");
