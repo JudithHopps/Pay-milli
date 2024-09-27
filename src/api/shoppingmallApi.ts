@@ -1,6 +1,6 @@
 export const fetchProductList = async () => {
   // todo : env Endpoint
-  const apiEndpoint = process.env.REACT_APP_API_END_POINT;
+  const apiEndpoint = process.env.REACT_APP_API_MALL_END_POINT;
 
   if (apiEndpoint) {
     const res = await fetch(apiEndpoint);
