@@ -68,7 +68,7 @@ export const postRefreshTokenAPI = async (accessToken: string) => {
 };
 
 // 결제 비밀번호 인증 API (임시)
-export const PostVerifyPayPassword = async (
+export const postVerifyPayPassword = async (
   accessToken: string,
   paymentPassword: string,
 ) => {
@@ -85,16 +85,20 @@ export const PostVerifyPayPassword = async (
 };
 
 // 결제 비밀번호 변경 API (임시)
-export const PutUpdatePayPassword = async (
+export const putUpdatePayPassword = async (
   accessToken: string,
+  paymentPasswordToken: string,
   paymentPassword: string,
 ) => {
   const response = await axiosInstance.put(
     "/member/payment/password",
-    { paymentPassword },
+    {
+      paymentPassword,
+    },
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        paymentPasswordToken: paymentPasswordToken,
       },
     },
   );
