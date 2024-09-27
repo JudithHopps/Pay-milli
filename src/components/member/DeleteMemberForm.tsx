@@ -16,13 +16,13 @@ export default function DeleteMemberForm() {
       return;
     }
 
-    if (!window.confirm("정말로 회원 탈퇴를 진행하시겠습니까?")) {
+    if (!window.confirm("회원탈퇴를 진행하시겠습니까?")) {
       return;
     }
 
     try {
       await deleteMemberAPI(accessToken);
-      alert("회원 탈퇴가 완료되었습니다.");
+      alert("회원 탈퇴 성공");
       navigate("/");
     } catch (err) {
       console.error(err);

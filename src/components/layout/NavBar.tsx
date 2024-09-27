@@ -15,17 +15,20 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     const accessToken = Cookies.get("accessToken");
-
     if (!accessToken) {
-      alert("이미 로그아웃 상태입니다.");
+      alert("로그인이 필요합니다.");
       navigate("/login");
+      return;
+    }
+
+    if (!window.confirm("로그아웃을 진행하시겠습니까?")) {
       return;
     }
 
     try {
       await postLogoutAPI(accessToken);
       setIsLogin(false);
-      alert("로그아웃 되었습니다.");
+      alert("로그아웃 성공");
       navigate("/login");
     } catch (err) {
       console.error(err);
